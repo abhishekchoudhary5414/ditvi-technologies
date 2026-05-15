@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
 import JsonLd from "@/components/JsonLd";
+import PopupTrigger from '@/custom/getquotepopup/PopupTrigger'
 
 
 
@@ -122,6 +123,7 @@ export default function RootLayout({
       </head>
       <body>
         <Navbar />
+        <PopupTrigger />
         {children}
         <Footer />
       </body>
