@@ -34,7 +34,7 @@ export default function Home() {
       <div>
         <Hero />
         <About />
-        <Services />
+        <Services limit={3} showViewMore />
         {/* <Project /> */}
         <Blog />
         <Clients />

@@ -17,6 +17,10 @@ interface ServiceCardProps {
     index: number
 }
 
+interface ServicesProps {
+    limit?: number
+    showViewMore?: boolean
+}
 
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ service, isReversed, index }) => {
@@ -114,7 +118,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isReversed, index })
 }
 
 
-const Services: React.FC = () => {
+const Services: React.FC<ServicesProps> = ({ limit, showViewMore }) => {
+    const displayedServices = typeof limit === 'number' ? services.slice(0, limit) : services
+
     return (
         <section className={styles.services} id="services">
             <div className={styles.container}>
@@ -125,7 +131,7 @@ const Services: React.FC = () => {
                 />
 
                 <div className={styles.servicesGrid}>
-                    {services.map((service, index) => (
+                    {displayedServices.map((service, index) => (
                         <ServiceCard
                             key={service.id}
                             service={service}
@@ -134,6 +140,14 @@ const Services: React.FC = () => {
                         />
                     ))}
                 </div>
+
+                {showViewMore && (
+                    <div className={styles.viewMoreWrapper}>
+                        <Button href="/services" variant="secondary">
+                            View More Services <FiArrowRight />
+                        </Button>
+                    </div>
+                )}
             </div>
         </section>
     )

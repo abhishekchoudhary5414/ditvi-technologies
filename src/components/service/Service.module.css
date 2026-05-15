@@ -16,6 +16,12 @@
     margin-top: 4rem;
 }
 
+.viewMoreWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
 .serviceCard {
     display: grid;
     grid-template-columns: 1fr 1fr;
