@@ -7,6 +7,7 @@ import {
     FiArchive, FiSearch, FiFilter, FiClock, FiCheckCircle
 } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
+import Skeleton from '@/custom/skeleton/Skeleton'
 import styles from './Dashboard.module.css'
 
 // Types
@@ -300,9 +301,15 @@ const AdminDashboard = () => {
                 {/* Content */}
                 <div className={styles.content}>
                     {loading ? (
-                        <div className={styles.loading}>
-                            <div className={styles.spinner}></div>
-                            <span>Loading...</span>
+                        <div className={styles.loadingSkeleton}>
+                            {Array.from({ length: 5 }).map((_, idx) => (
+                                <div key={idx} className={styles.skeletonCard}>
+                                    <Skeleton width="30%" height="20px" />
+                                    <Skeleton width="100%" height="25px" style={{ marginTop: '10px' }} />
+                                    <Skeleton width="80%" height="18px" style={{ marginTop: '8px' }} />
+                                    <Skeleton width="60%" height="18px" style={{ marginTop: '8px' }} />
+                                </div>
+                            ))}
                         </div>
                     ) : error ? (
                         <div className={styles.error}>

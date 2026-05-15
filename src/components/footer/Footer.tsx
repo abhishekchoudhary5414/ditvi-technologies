@@ -5,8 +5,6 @@ import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import styles from './Footer.module.css'
 import { socialLinks } from '@/json/ditviinfo'
 import { contactDetails } from '@/json/ditviinfo'
-import Logo from "../../assets/logo.png";
-
 
 const quickLinks = [
     { name: 'Home', href: '/' },
@@ -18,11 +16,9 @@ const quickLinks = [
 ]
 
 const services = [
-    { name: 'Digital Identity', href: '/services/digital-identity' },
-    { name: 'Branding', href: '/services/branding' },
-    { name: 'Local SEO', href: '/services/seo' },
-    { name: 'Social Media', href: '/services/social-media' },
-    { name: 'Lead Generation', href: '/services/lead-generation' }
+    { name: 'Digital Presence', href: '/services/digital-presence' },
+    { name: 'Celebration Birthday', href: '/services/celebration-birthday/' },
+    { name: 'Wedding Celebration', href: '/services/wedding-celebration' },
 ]
 
 
@@ -37,10 +33,10 @@ const Footer = () => {
                     <div className={styles.companyInfo}>
                         <Link href="/" className={styles.logo}>
                             <Image
-                                src={Logo}
+                                src="/logo.png"
                                 alt="Ditvi Technologies"
-                                width={1000}
-                                height={1000}
+                                width={150}
+                                height={48}
                                 className={styles.logoImage}
                             />
                         </Link>
@@ -87,10 +83,10 @@ const Footer = () => {
                         </div>
 
                         <div className={styles.linkColumn}>
-                            <h3>Sitemap</h3>
+                            <h3>Admin</h3>
                             <ul>
                                 <li>
-                                    <Link href="/contact">Sitemap</Link>
+                                    <Link href="/admin/login">Admin</Link>
                                 </li>
                             </ul>
 

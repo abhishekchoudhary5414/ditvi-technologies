@@ -5,7 +5,6 @@ import styles from './About.module.css'
 import Image from 'next/image'
 import Heading from '@/custom/heading/Heading'
 import Button from '@/custom/buttons/Button'
-import AboutImage from "../../assets/about/about.jpg"
 
 
 const About = () => {
@@ -33,7 +32,7 @@ const About = () => {
           >
             <div className={styles.imageBorder}>
               <Image
-                src={AboutImage}
+                src="/assets/about/about.jpg"
                 alt="Our Work Culture"
                 width={500}
                 height={600}

@@ -70,7 +70,6 @@ const Contact = () => {
                 {
                     name: values.name.trim(),
                     number: values.number.trim(),
-                    subject: values.subject.trim(),
                     message: values.message.trim(),
                     status: 'new',
                     created_at: new Date().toISOString()
@@ -161,17 +160,7 @@ const Contact = () => {
                                     )}
                                 </div>
 
-                                <div className={styles.formGroup}>
-                                    <Field
-                                        type="text"
-                                        name="subject"
-                                        placeholder="Subject"
-                                        className={errors.subject && touched.subject ? styles.errorInput : ''}
-                                    />
-                                    {errors.subject && touched.subject && (
-                                        <span className={styles.errorText}>{errors.subject}</span>
-                                    )}
-                                </div>
+
 
                                 <div className={styles.formGroup}>
                                     <Field

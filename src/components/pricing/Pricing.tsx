@@ -176,10 +176,10 @@ export const Pricing = ({ packages, serviceTitle, onGetQuote }: PricingProps) =>
                             >
                                 <Button
                                     variant="primary"
-                                    onClick={() => onGetQuote(`${serviceTitle} - ${pkg.name}`)}
+                                    onClick={() => onGetQuote(serviceTitle)}
                                     className={styles.packageButton}
                                 >
-                                    Get Started
+                                    Enquiry Now
                                 </Button>
                             </motion.div>
                         </div>

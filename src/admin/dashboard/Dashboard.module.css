@@ -351,6 +351,21 @@
     color: var(--text-secondary, #64748b);
 }
 
+.loadingSkeleton {
+    display: grid;
+    gap: 1rem;
+}
+
+.skeletonCard {
+    background: var(--card-background, white);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .spinner {
     width: 40px;
     height: 40px;

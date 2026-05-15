@@ -15,8 +15,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from './Testimonial.module.css';
 import Heading from '@/custom/heading/Heading';
-import FemaleProfile from "../../assets/testimonial/female.png"
-import BoyProfile from "../../assets/testimonial/boy.png"
 
 interface TestimonialItem {
     id: number;
@@ -32,7 +30,7 @@ const testimonials: TestimonialItem[] = [
         id: 1,
         name: 'Jaya',
         position: 'CEO',
-        image: FemaleProfile,
+        image: '/assets/testimonial/female.png',
         quote:
             'Sharma Interiors transformed our office space into a modern, functional environment. Their attention to detail exceeded our expectations.',
         rating: 5
@@ -41,7 +39,7 @@ const testimonials: TestimonialItem[] = [
         id: 2,
         name: 'R.K. Singh',
         position: 'Restaurant Manager',
-        image: BoyProfile,
+        image: '/assets/testimonial/boy.png',
         quote:
             'The wooden work and partitions they installed are simply outstanding. The team was efficient, and the results were exactly what we envisioned.',
         rating: 5
@@ -50,7 +48,7 @@ const testimonials: TestimonialItem[] = [
         id: 3,
         name: 'A. Patel',
         position: 'Hotel Director',
-        image: BoyProfile,
+        image: '/assets/testimonial/boy.png',
         quote:
             'Their expertise in ceiling work and paneling is remarkable. They delivered the project on time and maintained high quality throughout.',
         rating: 5
@@ -59,7 +57,7 @@ const testimonials: TestimonialItem[] = [
         id: 4,
         name: 'J. Sharma',
         position: 'Interior Designer',
-        image: BoyProfile,
+        image: '/assets/testimonial/boy.png',
         quote:
             'Sharma Interiors has an incredible eye for design. They helped us create a cohesive look throughout our office that truly reflects our brand.',
         rating: 5

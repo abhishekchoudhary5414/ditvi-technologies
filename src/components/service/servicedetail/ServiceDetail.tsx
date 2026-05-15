@@ -1,38 +1,28 @@
 'use client'
 
-import React, { FC, useMemo, useState } from 'react'
-import Image from 'next/image'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FiArrowLeft, FiUsers, FiBox, FiSmile } from 'react-icons/fi'
-import { services, ServiceItem } from '@/json/services'
 import Button from '@/custom/buttons/Button'
 import styles from './ServiceDetail.module.css'
 import GetQuotePopup from '@/custom/getquotepopup/GetQuotePopup'
-import { Pricing } from '@/components/pricing/Pricing'
-import { CityData } from '@/json/seo'
 
+import type { CityRoute } from '@/data/cities'
+import type { ServiceItem } from '@/json/services'
 
 interface ServiceDetailProps {
-  params: {
-    slug: string;
-    city?: string;
-  };
-   service: ServiceItem;
-  cityData?: CityData;
+  service: ServiceItem;
+  cityData?: CityRoute;
 }
 
-const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) => {
-  const slugPath = `/services/${params.slug}`
+const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
   const [showQuotePopup, setShowQuotePopup] = useState(false)
   const [selectedPackage, setSelectedPackage] = useState('')
 
-  // const service = useMemo<ServiceItem | undefined>(
-  //   () => services.find((s) => s.path === slugPath),
-  //   [slugPath]
-  // )
 
-  //e
+
+
   if (!service) {
     return (
       <section className={styles.notFound}>
@@ -49,12 +39,13 @@ const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) =>
   }
 
   const pageTitle = cityData
-    ? `${service.title} in ${cityData.name}`
+    ? `${service.title} in ${cityData.name}, ${cityData.state}, ${cityData.country}`
     : service.title;
 
   const pageDescription = cityData
-    ? `${service.description} in ${cityData.name}, ${cityData.state}`
+    ? `${service.description} in ${cityData.name}, ${cityData.state}, ${cityData.country}. Contact us for expert ${service.title.toLowerCase()} services in your area.`
     : service.description;
+
 
   const statsItems = [
     {
@@ -91,6 +82,8 @@ const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) =>
               </Button>
             </nav>
 
+            <br />
+
             <motion.div
               className={styles.heroContent}
               initial={{ opacity: 0, y: 30 }}
@@ -100,6 +93,18 @@ const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) =>
               <h1 className={styles.title}>{pageTitle}</h1>
               <h2 className={styles.subtitle}>{service.subtitle}</h2>
               <p className={styles.description}>{pageDescription}</p>
+              {service.svgComponent && <service.svgComponent />}
+              <div className={styles.enquiryAction}>
+                <Button
+                  variant='primary'
+                  onClick={() => {
+                    setSelectedPackage(service.title)
+                    setShowQuotePopup(true)
+                  }}
+                >
+                  Enquiry Now
+                </Button>
+              </div>
             </motion.div>
 
             {/* Stats Section with Hero Image */}
@@ -113,14 +118,6 @@ const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) =>
                   transition={{ duration: 1 }}
                 >
                   <div className={styles.imageWrapper}>
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={600}
-                      height={400}
-                      className={styles.heroImg}
-                      priority
-                    />
                     <div className={styles.imageOverlay} />
                   </div>
                 </motion.div>
@@ -248,15 +245,108 @@ const ServiceDetail: FC<ServiceDetailProps> = ({ params, service, cityData }) =>
             </motion.section>
           </motion.div>
 
-          {/* Pricing Section */}
-          <Pricing
-            packages={service.pricing}
-            serviceTitle={service.title}
-            onGetQuote={(packageName) => {
-              setSelectedPackage(packageName);
-              setShowQuotePopup(true);
-            }}
-          />
+          {/* Detailed Description Section */}
+          <motion.section className={styles.detailedSection}>
+            <div className={styles.sectionContent}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <h2 className={styles.sectionTitle}>Why Choose Our {service.title}?</h2>
+                <div className={styles.detailsList}>
+                  {service.detailedDescription.map((detail, index) => (
+                    <motion.div
+                      key={index}
+                      className={styles.detailItem}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <span className={styles.detailNumber}>{index + 1}</span>
+                      <p className={styles.detailText}>{detail}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Call to Action Section */}
+              <motion.div
+                className={styles.ctaSection}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <h3 className={styles.ctaTitle}>Ready to Get Started?</h3>
+                <p className={styles.ctaDescription}>
+                  Let our experts help you implement {service.title.toLowerCase()} solutions tailored to your needs.
+                  {cityData && ` In ${cityData.name}, ${cityData.state}.`}
+                </p>
+                <motion.div
+                  className={styles.ctaButtons}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <Button
+                    variant='primary'
+                    onClick={() => {
+                      setSelectedPackage(service.title)
+                      setShowQuotePopup(true)
+                    }}
+                    className={styles.enquiryButton}
+                  >
+                    Enquiry Now
+                  </Button>
+                  <Button
+                    variant='secondary'
+                    href='/contact'
+                    className={styles.contactButton}
+                  >
+                    Contact Us
+                  </Button>
+                </motion.div>
+              </motion.div>
+
+              {/* Key Metrics */}
+              <motion.div
+                className={styles.metricsSection}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <h3 className={styles.metricsTitle}>Our Track Record</h3>
+                <div className={styles.metricsGrid}>
+                  <motion.div
+                    className={styles.metricCard}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className={styles.metricNumber}>{service.stats.clients}+</div>
+                    <div className={styles.metricLabel}>Happy Clients</div>
+                  </motion.div>
+                  <motion.div
+                    className={styles.metricCard}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className={styles.metricNumber}>{service.stats.projects}+</div>
+                    <div className={styles.metricLabel}>Projects Delivered</div>
+                  </motion.div>
+                  <motion.div
+                    className={styles.metricCard}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className={styles.metricNumber}>{service.stats.satisfaction}%</div>
+                    <div className={styles.metricLabel}>Client Satisfaction</div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.section>
         </div>
       </section>
 

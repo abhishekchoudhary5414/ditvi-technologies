@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 import Footer from "@/components/footer/Footer";
-import Head from "next/head";
+import JsonLd from "@/components/JsonLd";
 
 
 
@@ -65,19 +65,20 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
     other: {
       rel: 'apple-touch-icon-precomposed',
-      url: '/apple-touch-icon-precomposed.png',
+      url: '/logo.png',
     },
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
   themeColor: '#ffffff',
 };
 
@@ -86,15 +87,40 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ditvi Technologies",
+    "url": "https://technologies.ditvi.org",
+    "logo": "https://technologies.ditvi.org/logo.png",
+    "description": "Ditvi Technologies provides premium digital solutions including biodata creation, resume services, and digital celebrations. Transform your digital presence with our professional services.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-9285248504",
+      "contactType": "customer service",
+      "email": "care@ditvi.org"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ramjaipal Road, Opp. Gola Road, Near Hotel Magadh Palace",
+      "addressLocality": "Patna",
+      "postalCode": "801503",
+      "addressCountry": "IN"
+    },
+    "sameAs": [
+      "https://facebook.com/ditvi",
+      "https://twitter.com/ditvi",
+      "https://instagram.com/ditvi",
+      "https://linkedin.com/company/ditvi"
+    ]
+  };
+
   return (
     <html lang="en">
-     <Head>
-        <meta
-          name="google-site-verification"
-          content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
-        />
-      </Head>
-      <body >
+      <head>
+        <JsonLd data={jsonLdData} />
+      </head>
+      <body>
         <Navbar />
         {children}
         <Footer />

@@ -51,18 +51,17 @@ const GetQuotePopup: React.FC<GetQuotePopupProps> = ({
   }, [selectedService])
 
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
 
     const nameValid = /^[A-Za-z\s]+$/.test(formData.name.trim())
-    const phoneValid = /^[6-9]\d{9}$/.test(formData.phone)
 
-    if (!nameValid || !phoneValid) {
+    if (!nameValid) {
       setErrors({
         name: nameValid ? '' : 'Please enter a valid name',
-        phone: phoneValid ? '' : 'Please enter a valid 10-digit number'
+        phone: ''
       })
       return
     }
-    e.preventDefault()
     setIsSubmitting(true)
 
     try {
@@ -125,24 +124,6 @@ const GetQuotePopup: React.FC<GetQuotePopupProps> = ({
       }
     }
 
-    // Phone validation
-    if (name === 'phone') {
-      if (value && !/^[6-9]\d{0,9}$/.test(value)) {
-        setErrors(prev => ({
-          ...prev,
-          phone: 'Enter valid 10-digit number starting with 6-9'
-        }))
-        if (!/^[6-9]\d*$/.test(value)) {
-          return
-        }
-      } else {
-        setErrors(prev => ({
-          ...prev,
-          phone: value.length === 10 ? '' : 'Phone number must be 10 digits'
-        }))
-      }
-    }
-
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
@@ -166,7 +147,7 @@ const GetQuotePopup: React.FC<GetQuotePopupProps> = ({
           </div>
         ) : (
           <>
-            <h2 className={styles.title}>Contact Us</h2>
+            <h2 className={styles.title}>Enquiry Now</h2>
             <p className={styles.description}>
               Fill out the form below and we&apos;ll get back to you within 24 hours.
             </p>
@@ -196,7 +177,7 @@ const GetQuotePopup: React.FC<GetQuotePopupProps> = ({
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  maxLength={10}
+                  maxLength={15}
                   placeholder="Enter your phone number"
                   className={errors.phone ? styles.errorInput : ''}
                 />

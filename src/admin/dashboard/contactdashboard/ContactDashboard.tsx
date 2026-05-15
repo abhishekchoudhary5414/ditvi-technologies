@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiInbox, FiCheck, FiX, FiArchive, FiSearch, FiFilter } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
+import Skeleton from '@/custom/skeleton/Skeleton'
 import styles from './ContactDashboard.module.css'
 
 interface Contact {
@@ -133,7 +134,16 @@ const ContactDashboard = () => {
                 <div className={styles.content}>
                     <div className={styles.contactsList}>
                         {loading ? (
-                            <div className={styles.loading}>Loading...</div>
+                            <div className={styles.loadingSkeleton}>
+                                {Array.from({ length: 5 }).map((_, idx) => (
+                                    <div key={idx} className={styles.skeletonCard}>
+                                        <Skeleton width="30%" height="20px" />
+                                        <Skeleton width="100%" height="25px" style={{ marginTop: '10px' }} />
+                                        <Skeleton width="80%" height="18px" style={{ marginTop: '8px' }} />
+                                        <Skeleton width="60%" height="18px" style={{ marginTop: '8px' }} />
+                                    </div>
+                                ))}
+                            </div>
                         ) : filteredContacts.length === 0 ? (
                             <div className={styles.empty}>No contacts found</div>
                         ) : (

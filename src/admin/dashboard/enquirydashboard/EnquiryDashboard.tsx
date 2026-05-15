@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiPhone, FiCheck, FiX, FiArchive, FiSearch, FiFilter, FiClock, FiCheckCircle } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
+import Skeleton from '@/custom/skeleton/Skeleton'
 import styles from './EnquiryDashboard.module.css'
 
 interface Quote {
@@ -124,9 +125,15 @@ const QuoteDashboard = () => {
         <div className={styles.content}>
           <div className={styles.quotesList}>
             {loading ? (
-              <div className={styles.loading}>
-                <div className={styles.spinner}></div>
-                <span>Loading quotes...</span>
+              <div className={styles.loadingSkeleton}>
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <div key={idx} className={styles.skeletonCard}>
+                    <Skeleton width="30%" height="20px" />
+                    <Skeleton width="100%" height="25px" style={{ marginTop: '10px' }} />
+                    <Skeleton width="80%" height="18px" style={{ marginTop: '8px' }} />
+                    <Skeleton width="60%" height="18px" style={{ marginTop: '8px' }} />
+                  </div>
+                ))}
               </div>
             ) : filteredQuotes.length === 0 ? (
               <div className={styles.empty}>

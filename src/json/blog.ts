@@ -1,15 +1,15 @@
 
 import { StaticImageData } from "next/image"
-import BlogImage1 from "../assets/blog/blog1.jpg"
-import BlogImage2 from "../assets/blog/blog2.jpg"
-import BlogImage3 from "../assets/blog/blog3.jpg"
-import BlogImage4 from "../assets/blog/blog4.jpg"
-import BlogImage5 from "../assets/blog/blog5.jpg"
-import BlogImage6 from "../assets/blog/blog6.jpg"
-import BlogImage7 from "../assets/blog/blog7.jpg" 
-import BlogImage8 from "../assets/blog/blog8.jpg"
-import BlogImage9 from "../assets/blog/blog9.jpg"
-import BlogImage10 from "../assets/blog/blog10.jpg"
+import BlogImage1 from "../../public/assets/blog/blog1.jpg"
+import BlogImage2 from "../../public/assets/blog/blog2.jpg"
+import BlogImage3 from "../../public/assets/blog/blog3.jpg"
+import BlogImage4 from "../../public/assets/blog/blog4.jpg"
+import BlogImage5 from "../../public/assets/blog/blog5.jpg"
+import BlogImage6 from "../../public/assets/blog/blog6.jpg"
+import BlogImage7 from "../../public/assets/blog/blog7.jpg" 
+import BlogImage8 from "../../public/assets/blog/blog8.jpg"
+import BlogImage9 from "../../public/assets/blog/blog9.jpg"
+import BlogImage10 from "../../public/assets/blog/blog10.jpg"
 
 
 export interface BlogPost {

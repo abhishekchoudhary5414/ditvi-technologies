@@ -2,12 +2,10 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
 import { FiUser, FiLock, FiEye, FiEyeOff } from 'react-icons/fi'
 import { supabase } from '../../lib/supabase'
 import styles from './Login.module.css'
 import { toast } from 'react-hot-toast'
-import DitviLogo from "../../assets/logo.png"
 
 const Login = () => {
     const router = useRouter()
@@ -63,14 +61,10 @@ const Login = () => {
 
     return (
         <div className={styles.loginContainer}>
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={styles.loginCard}
-            >
+            <div className={styles.loginCard}>
                 <div className={styles.logoContainer}>
                     <Image
-                        src={DitviLogo}
+                        src="/logo.png"
                         alt="Ditvi Technologies Logo"
                         width={150}
                         height={50}
@@ -82,13 +76,9 @@ const Login = () => {
                 <p className={styles.subtitle}>Welcome back! Please login to continue.</p>
 
                 {errorMessage && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className={styles.error}
-                    >
+                    <div className={styles.error}>
                         {errorMessage}
-                    </motion.div>
+                    </div>
                 )}
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -140,7 +130,7 @@ const Login = () => {
                         {isLoading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
-            </motion.div>
+            </div>
         </div>
     )
 }

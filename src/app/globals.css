@@ -2,6 +2,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --primary-color: #ff6000;
+  --accent-color: #ff6000;
   --primary-hover: #ff7a2f;
   --text-primary: #333333;
   --text-secondary: #666666;
@@ -14,11 +15,14 @@
   --card-background: #ffffff;
   --hover-background: rgba(255, 96, 0, 0.08);
   --background-gradient: linear-gradient(135deg, #fff7f2, #ffffff);
-  --primary-rgb: 37, 99, 235;
+  --primary-rgb: 255, 96, 0;
   --text-primary: #1e293b;
   --text-secondary: #64748b;
-    --text-gradient: linear-gradient(45deg, #1e293b, #334155);
-
+  --text-gradient: linear-gradient(45deg, #1e293b, #334155);
+  --error: #dc2626;
+  --error-light: rgba(220, 38, 38, 0.1);
+  --input-background: #ffffff;
+  --primary-color-light: rgba(255, 96, 0, 0.2);
 }
 
 html,

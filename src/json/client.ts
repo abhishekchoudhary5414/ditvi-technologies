@@ -1,20 +1,20 @@
-import ClientLogo1 from '@/assets/client/client1.png'
-import ClientLogo2 from '@/assets/client/client2.png'
-import ClientLogo3 from '@/assets/client/client3.png'
-import ClientLogo4 from '@/assets/client/client4.png'
-import Website1 from "../assets/client/sharma-interiors/website.png"
-import VisitingCard1 from "../assets/client/sharma-interiors/visitingcard.png"
-import VisitingCard2 from "../assets/client/sah-constructions/visitingcard.png"
-import Website2 from "../assets/client/sah-constructions/website.png"
-import LetterHead2 from "../assets/client/sah-constructions/letterhead.png"
-import VisitingCard3 from "../assets/client/achintya-enterprises/visitingcard.png"
-import Website3 from "../assets/client/achintya-enterprises/website.png"
-import VisitingCard4 from "../assets/client/sl-engineers/visitingcard.png"
-import Website4 from "../assets/client/sl-engineers/website.png"
+import ClientLogo1 from '../../public/assets/client/client1.png'
+import ClientLogo2 from '../../public/assets/client/client2.png'
+import ClientLogo3 from '../../public/assets/client/client3.png'
+import ClientLogo4 from '../../public/assets/client/client4.png'
+import Website1 from "../../public/assets/client/sharma-interiors/website.png"
+import VisitingCard1 from "../../public/assets/client/sharma-interiors/visitingcard.png"
+import VisitingCard2 from "../../public/assets/client/sah-constructions/visitingcard.png"
+import Website2 from "../../public/assets/client/sah-constructions/website.png"
+import LetterHead2 from "../../public/assets/client/sah-constructions/letterhead.png"
+import VisitingCard3 from "../../public/assets/client/achintya-enterprises/visitingcard.png"
+import Website3 from "../../public/assets/client/achintya-enterprises/website.png"
+import VisitingCard4 from "../../public/assets/client/sl-engineers/visitingcard.png"
+import Website4 from "../../public/assets/client/sl-engineers/website.png"
 import type { StaticImageData } from 'next/image'
 
 export interface ProjectWork {
-  type:  'logo' | 'website' | 'visitingCard' | 'profile' | 'business' | 'letterHead'
+  type: 'logo' | 'website' | 'visitingCard' | 'profile' | 'business' | 'letterHead'
   title: string
   description: string
   images?: StaticImageData[]
@@ -89,7 +89,7 @@ export const clients: Client[] = [
         images: [Website2],
         url: 'https://www.sahconstructions.com',
       },
-       {
+      {
         type: 'visitingCard',
         title: 'Business Card Design',
         description: 'Elegant business card design with modern typography and brand elements.',
@@ -101,7 +101,7 @@ export const clients: Client[] = [
         description: 'Digital company profile presentation highlighting services and achievements.',
         presentationUrl: 'https://www.canva.com/design/DAGwgeklyeU/IlGwBotTtDGvBn16-HdYUQ/view?embed',
       },
-       {
+      {
         type: 'letterHead',
         title: 'Company Letter Head',
         description: 'Elegant Letter Head for Company.',
@@ -165,7 +165,7 @@ export const clients: Client[] = [
         images: [Website4],
         url: 'https://sl-engineerings.com',
       },
-        {
+      {
         type: 'visitingCard',
         title: 'Corporate Stationery',
         description: 'Complete business stationery design including cards and letterheads.',

@@ -10,6 +10,7 @@ interface ContactDetails {
   email: string;
   number: string;
   address: string;
+  whatsappnumber: string;
 }
 
 export const socialLinks: SocialLink[] = [
@@ -21,6 +22,7 @@ export const socialLinks: SocialLink[] = [
 
 export const contactDetails: ContactDetails = {
   email: 'care@ditvi.org',
-  number: '+91 7498696126',
+  number: '+91 9285248504',
+  whatsappnumber: '919285248504',
   address: 'Ramjaipal Road, Opp. Gola Road, Near Hotel Magadh Palace, Patna-801503'
 };

@@ -93,6 +93,22 @@
   transition: transform 0.6s ease;
 }
 
+.heroSvgWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-secondary);
+}
+
+.heroSvg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .imageOverlay {
   position: absolute;
   inset: 0;
@@ -863,5 +879,236 @@
 
   .cardContent p {
     font-size: 0.95rem;
+  }
+}
+
+/* Detailed Section */
+.detailedSection {
+  margin: 6rem 0;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05), rgba(var(--accent-rgb), 0.05));
+  border-radius: 2rem;
+}
+
+.sectionContent {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-align: center;
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.detailsList {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.detailItem {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.detailItem:hover {
+  transform: translateX(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.detailNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  height: 50px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.detailText {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* CTA Section */
+.ctaSection {
+  background: rgba(255, 255, 255, 0.98);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ctaTitle {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.ctaDescription {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.enquiryButton,
+.contactButton {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.enquiryButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.enquiryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(var(--primary-rgb), 0.3);
+}
+
+.contactButton {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.contactButton:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Metrics Section */
+.metricsSection {
+  margin-top: 4rem;
+}
+
+.metricsTitle {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.metricCard {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-color);
+}
+
+.metricNumber {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* Enquiry Action */
+.enquiryAction {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+  .detailedSection {
+    padding: 2rem 1rem;
+    margin: 4rem 0;
+  }
+
+  .detailItem {
+    flex-direction: column;
+    border-left: none;
+    border-top: 4px solid var(--primary-color);
+  }
+
+  .detailItem:hover {
+    transform: none;
+  }
+
+  .detailNumber {
+    margin: 0 auto;
+  }
+
+  .ctaSection {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .enquiryButton,
+  .contactButton {
+    width: 100%;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }

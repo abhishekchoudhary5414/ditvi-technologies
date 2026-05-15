@@ -3,19 +3,15 @@ import { notFound } from 'next/navigation'
 import ProjectView from '@/components/projectview/ProjectView'
 import { clients } from '@/json/client'
 
-interface PageProps {
+export const dynamic = 'force-dynamic'
 
+interface PageProps {
     params: Promise<{ slug: string }>
 }
 
-export async function generateStaticParams() {
-    return clients.map(client => ({
-        slug: client.slug,
-    }))
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-    const client = clients.find(async c => c.slug === (await params).slug)
+    const resolvedParams = await params
+    const client = clients.find(c => c.slug === resolvedParams.slug)
 
     if (!client) {
         return {
@@ -36,7 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ProjectPage({ params }: PageProps) {
-    const client = clients.find(async c => c.slug === (await params).slug)
+    const resolvedParams = await params
+    const client = clients.find(c => c.slug === resolvedParams.slug)
 
     if (!client) {
         notFound()
@@ -44,7 +41,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
     return (
         <div className="project-page">
-            <ProjectView slug={(await params).slug} />
+            <ProjectView slug={resolvedParams.slug} />
         </div>
     )
 }

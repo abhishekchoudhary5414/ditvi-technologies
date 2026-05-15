@@ -6,7 +6,6 @@ import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import clsx from 'clsx';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
-import Logo from "../../assets/logo.png";
 import { FaWhatsapp } from 'react-icons/fa';
 import { contactDetails } from '@/json/ditviinfo'
 
@@ -69,7 +68,7 @@ const Navbar: React.FC = () => {
         <div className={styles.container}>
           <div className={styles.navContent}>
             <Link href="/" className={styles.logo}>
-              <Image src={Logo} alt="Ditvi Technologies" className={styles.logoImage} />
+              <Image src="/logo.png" alt="Ditvi Technologies" width={120} height={48} className={styles.logoImage} />
             </Link>
 
 
@@ -93,7 +92,7 @@ const Navbar: React.FC = () => {
         </div>
       </nav>
       <a
-        href={`https://wa.me/${contactDetails.number.replace('+', '')}?text=${whatsappMessage}`}
+        href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
         className={styles.whatsappButton}
         target="_blank"
         rel="noopener noreferrer"
