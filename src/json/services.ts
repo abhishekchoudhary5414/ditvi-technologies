@@ -3020,4 +3020,270 @@ export const services: ServiceItem[] = [
 
         keywords: "interior website, interior design website, home decor website, architecture interior website, luxury interior website, furniture studio website, interior business website"
     },
+    {
+        id: 12,
+
+        title: "School Website",
+
+        subtitle: "Modern school websites designed to enhance communication, admissions, and student engagement.",
+
+        startingPrice: "Starts from ₹13,999",
+
+        description: "Build a professional school website with admission enquiry systems, course information, event galleries, student portals, announcements, and premium branding features for educational institutions.",
+
+        descriptionContent: "Our School Website solutions are designed for schools, academies, coaching institutes, colleges, and educational organizations looking to establish a strong digital presence. We create modern, responsive, and feature-rich websites that help improve communication with students and parents, simplify admission processes, and strengthen institutional credibility. From admission enquiry systems and notice boards to student portals and online branding, we provide complete website solutions tailored for the education sector.",
+
+        detailedDescription: [
+            "A professional school website helps build trust with parents and improves your institution’s online presence.",
+            "We create modern and engaging school websites tailored to your institution’s identity and educational goals.",
+            "Our websites are designed to showcase courses, achievements, faculty members, infrastructure, and student activities professionally.",
+            "We integrate admission enquiry systems, online registration forms, and communication tools for seamless parent interaction.",
+            "Our responsive designs ensure students and parents can access information easily from any device.",
+            "From schools and coaching institutes to colleges and academies, we create websites for every educational institution.",
+            "We focus on creating user-friendly digital experiences with organized layouts and modern educational branding.",
+            "Our SEO-friendly structure helps educational institutions improve online visibility and attract more admissions.",
+            "Partner with us to transform your educational institution into a trusted digital learning brand."
+        ],
+
+        challenges: [
+            {
+                icon: "📉",
+                title: "Low Online Visibility",
+                description: "Difficulty reaching parents and students online"
+            },
+            {
+                icon: "📚",
+                title: "Admission Management Issues",
+                description: "No proper online admission enquiry system"
+            },
+            {
+                icon: "📞",
+                title: "Poor Communication",
+                description: "Lack of effective communication channels with parents"
+            },
+            {
+                icon: "🏫",
+                title: "Weak Institutional Branding",
+                description: "Outdated websites reduce credibility"
+            },
+            {
+                icon: "📂",
+                title: "Disorganized Information",
+                description: "Courses, notices, and events are difficult to manage"
+            },
+            {
+                icon: "🤝",
+                title: "Low Parent Trust",
+                description: "Limited digital presence affects confidence"
+            }
+        ],
+
+        offerings: [
+            {
+                icon: "🏫",
+                title: "School Website Design",
+                description: "Modern and professional educational website layouts",
+                benefits: [
+                    "Custom School Themes",
+                    "Responsive Design",
+                    "Premium User Interface",
+                    "Modern Educational Branding"
+                ]
+            },
+            {
+                icon: "📚",
+                title: "Admission & Student Portal",
+                description: "Simplify admissions and student access",
+                benefits: [
+                    "Online Admission Forms",
+                    "Student Login Portal",
+                    "Result & Notice Section",
+                    "Fee Enquiry System"
+                ]
+            },
+            {
+                icon: "📞",
+                title: "Parent Communication System",
+                description: "Improve communication with parents and students",
+                benefits: [
+                    "Whatsapp Integration",
+                    "Contact & Enquiry Forms",
+                    "Announcements & Alerts",
+                    "Event Notifications"
+                ]
+            },
+            {
+                icon: "🎓",
+                title: "Course & Faculty Showcase",
+                description: "Highlight educational programs and staff",
+                benefits: [
+                    "Course Listing Pages",
+                    "Faculty Profiles",
+                    "Infrastructure Gallery",
+                    "Achievements Showcase"
+                ]
+            },
+            {
+                icon: "📈",
+                title: "SEO & Marketing Features",
+                description: "Improve online visibility and attract admissions",
+                benefits: [
+                    "SEO Optimization",
+                    "Google Business Integration",
+                    "Analytics Setup",
+                    "Social Media Integration"
+                ]
+            },
+            {
+                icon: "🤖",
+                title: "Automation & Dashboard",
+                description: "Manage admissions and enquiries efficiently",
+                benefits: [
+                    "Admin Dashboard",
+                    "Admission Tracking",
+                    "Automated Notifications",
+                    "Analytics & Reporting"
+                ]
+            }
+        ],
+
+        pricing: [
+            {
+                name: "School Starter 🎒",
+
+                oneTimePrice: 13999,
+
+                partPaymentPrice: 14999,
+
+                recommendedFor: ["Small schools", "Coaching institutes", "Educational startups"],
+
+                installments: {
+                    first: { percentage: 30, description: "🎨 Design & Branding" },
+                    second: { percentage: 50, description: "🏫 Website Development" },
+                    third: { percentage: 20, description: "At the Time of Hand Over Process" }
+                },
+
+                features: [
+                    {
+                        icon: "📘",
+                        title: "School Essentials",
+                        items: [
+                            "Responsive School Website",
+                            "Course & Faculty Pages",
+                            "Admission Enquiry Forms",
+                            "Notice Board Section",
+                            "Whatsapp Chat Integration",
+                            "Domain, SSL & Hosting Setup"
+                        ]
+                    }
+                ],
+
+                highlights: [
+                    "Perfect for schools and coaching institutes",
+                    "Mobile-friendly educational website",
+                    "3 months of support"
+                ]
+            },
+
+            {
+                name: "Smart Campus 🌟",
+
+                oneTimePrice: 29999,
+
+                partPaymentPrice: 30999,
+
+                recommendedFor: ["Growing schools", "Academies", "Colleges"],
+
+                installments: {
+                    first: { percentage: 30, description: "📚 Portal & Admission Features" },
+                    second: { percentage: 50, description: "📈 SEO & Management System" },
+                    third: { percentage: 20, description: "At the Time of Hand Over Process" }
+                },
+
+                features: [
+                    {
+                        icon: "🌟",
+                        title: "Everything in School Starter",
+                        items: []
+                    },
+                    {
+                        icon: "📈",
+                        title: "Advanced Features",
+                        items: [
+                            "Student Portal",
+                            "Admission Management System",
+                            "SEO Optimization",
+                            "Google Analytics Integration",
+                            "Event & Gallery Management",
+                            "Social Media Integration"
+                        ]
+                    }
+                ],
+
+                highlights: [
+                    "Complete educational institution solution",
+                    "6 months of priority support",
+                    "Enhanced parent and student engagement"
+                ],
+
+                popular: true
+            },
+
+            {
+                name: "Education Empire 👑",
+
+                oneTimePrice: 47999,
+
+                partPaymentPrice: 48999,
+
+                recommendedFor: ["Large schools", "Multi-campus institutions", "Educational groups"],
+
+                installments: {
+                    first: { percentage: 30, description: "🏫 Platform Development" },
+                    second: { percentage: 50, description: "🤖 Automation & Dashboard" },
+                    third: { percentage: 20, description: "At the Time of Hand Over Process" }
+                },
+
+                features: [
+                    {
+                        icon: "👑",
+                        title: "Everything in Smart Campus",
+                        items: []
+                    },
+                    {
+                        icon: "🤖",
+                        title: "Enterprise Features",
+                        items: [
+                            "Custom Admin Dashboard",
+                            "Advanced Admission Management",
+                            "Automated Notifications",
+                            "Real-Time Analytics",
+                            "Multi-User Access",
+                            "Custom API Integrations",
+                            "Premium UI Animations"
+                        ]
+                    }
+                ],
+
+                highlights: [
+                    "Complete digital education platform",
+                    "12 months of premium support",
+                    "Advanced automation and analytics",
+                    "Scalable enterprise-ready solution"
+                ]
+            }
+        ],
+
+        svgComponent: 'SchoolWebsiteSVG',
+
+        path: "/services/school-website",
+
+        stats: {
+            clients: 82,
+            projects: 145,
+            satisfaction: 99
+        },
+
+        keywords: "school website, education website, coaching institute website, academy website, college website, student portal website, educational institution website"
+    },
 ]

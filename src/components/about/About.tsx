@@ -36,6 +36,7 @@ const About = () => {
                 alt="Our Work Culture"
                 width={500}
                 height={600}
+                loading="eager"
                 className={styles.aboutImage}
               />
             </div>

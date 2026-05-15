@@ -148,6 +148,8 @@
 }
 
 .clientLogo {
+    width: auto;
+    /* height: auto; */
     object-fit: contain;
     /* filter: grayscale(100%); */
     opacity: 0.7;
