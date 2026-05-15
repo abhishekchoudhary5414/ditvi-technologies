@@ -1,6 +1,5 @@
 import { buildSitemapXml, getSitemapChunk, getSitemapChunkCount } from '@/lib/sitemap'
 
-export const dynamic = 'force-static'
 export const revalidate = false
 
 export async function GET(request: Request) {
