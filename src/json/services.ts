@@ -1,16 +1,4 @@
 import type { StaticImageData } from "next/image";
-import DigitalPresenceSVG from "../svg/DigitalPresenceSVG/DigitalPresenceSVG"
-import WebsiteDevelopmentSVG from "../svg/WebsiteDevelopmentSVG/WebsiteDevelopmentSVG"
-import WeddingWebsiteSVG from "../svg/WeddingWebsiteSVG/WeddingWebsiteSVG"
-import BirthdayWebsiteSVG from "../svg/BirthdayWebsiteSVG/BirthdayWebsiteSVG"
-import TaxiWebsiteSVG from "../svg/TaxiWebsiteSVG/TaxiWebsiteSVG"
-import AstrologyWebsiteSVG from "../svg/AstrologyWebsiteSVG/AstrologyWebsiteSVG"
-import DanceWebsiteSVG from "../svg/DanceWebsiteSVG/DanceWebsiteSVG"
-import GYMWebsiteSVG from "../svg/GYMWebsiteSVG/GYMWebsiteSVG"
-import SalonWebsiteSVG from "../svg/SalonWebsiteSVG/SalonSVG"
-import ConstructionWebsiteSVG from "../svg/ConstructionWebsiteSVG/ConstructionWebsiteSVG"
-import InteriorWebsiteSVG from "../svg/InteriorWebsiteSVG/InteriorWebsiteSVG"
-import { FC } from "react";
 
 
 export interface PricingFeature {
@@ -60,7 +48,7 @@ export interface ServiceItem {
     offerings: Offering[];
     pricing: PricingPackage[];
     image?: string | StaticImageData;
-    svgComponent?: React.FC;
+    svgComponent?: string;
     path: string;
     stats: {
         clients: number;
@@ -354,7 +342,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: DigitalPresenceSVG,
+        svgComponent: 'DigitalPresenceSVG',
 
         path: "/services/digital-presence",
 
@@ -620,7 +608,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: WebsiteDevelopmentSVG,
+        svgComponent: 'WebsiteDevelopmentSVG',
 
         path: "/services/website-development",
 
@@ -886,7 +874,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: WeddingWebsiteSVG,
+        svgComponent: 'WeddingWebsiteSVG',
 
         path: "/services/wedding-website",
 
@@ -1153,7 +1141,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: BirthdayWebsiteSVG,
+        svgComponent: 'BirthdayWebsiteSVG',
 
         path: "/services/birthday-website",
 
@@ -1420,7 +1408,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: TaxiWebsiteSVG,
+        svgComponent: 'TaxiWebsiteSVG',
 
         path: "/services/taxi-website-service",
 
@@ -1687,7 +1675,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: AstrologyWebsiteSVG,
+        svgComponent: 'AstrologyWebsiteSVG',
 
         path: "/services/astrology-website",
 
@@ -1954,7 +1942,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: DanceWebsiteSVG,
+        svgComponent: 'DanceWebsiteSVG',
 
         path: "/services/dance-website",
 
@@ -2221,7 +2209,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: GYMWebsiteSVG,
+        svgComponent: 'GYMWebsiteSVG',
 
         path: "/services/gym-website",
 
@@ -2488,7 +2476,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: SalonWebsiteSVG,
+        svgComponent: 'SalonWebsiteSVG',
 
         path: "/services/salon-website",
 
@@ -2754,7 +2742,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: ConstructionWebsiteSVG,
+        svgComponent: 'ConstructionWebsiteSVG',
 
         path: "/services/construction-website",
 
@@ -3020,7 +3008,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: InteriorWebsiteSVG,
+        svgComponent: 'InteriorWebsiteSVG',
 
         path: "/services/interior-website",
 

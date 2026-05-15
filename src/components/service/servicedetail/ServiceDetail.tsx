@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { FiArrowLeft, FiUsers, FiBox, FiSmile } from 'react-icons/fi'
 import Button from '@/custom/buttons/Button'
 import styles from './ServiceDetail.module.css'
+import { svgMap } from '@/svg/svgMap'
 import GetQuotePopup from '@/custom/getquotepopup/GetQuotePopup'
 
 import type { CityRoute } from '@/data/cities'
@@ -46,6 +47,7 @@ const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
     ? `${service.description} in ${cityData.name}, ${cityData.state}, ${cityData.country}. Contact us for expert ${service.title.toLowerCase()} services in your area.`
     : service.description;
 
+  const HeroSVG = service.svgComponent ? svgMap[service.svgComponent as keyof typeof svgMap] : null
 
   const statsItems = [
     {
@@ -93,7 +95,7 @@ const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
               <h1 className={styles.title}>{pageTitle}</h1>
               <h2 className={styles.subtitle}>{service.subtitle}</h2>
               <p className={styles.description}>{pageDescription}</p>
-              {service.svgComponent && <service.svgComponent />}
+           
               <div className={styles.enquiryAction}>
                 <Button
                   variant='primary'
@@ -118,7 +120,7 @@ const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
                   transition={{ duration: 1 }}
                 >
                   <div className={styles.imageWrapper}>
-                    <div className={styles.imageOverlay} />
+                       {HeroSVG && <HeroSVG />}
                   </div>
                 </motion.div>
 

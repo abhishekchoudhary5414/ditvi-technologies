@@ -7,6 +7,7 @@ import styles from './Service.module.css'
 import Heading from '@/custom/heading/Heading'
 import Button from '@/custom/buttons/Button'
 import { services, ServiceItem } from '../../json/services'
+import { svgMap } from '@/svg/svgMap'
 import GetQuotePopup from '@/custom/getquotepopup/GetQuotePopup'
 
 
@@ -45,6 +46,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isReversed, index })
         }
     }
 
+    const SvgComponent = service.svgComponent ? svgMap[service.svgComponent as keyof typeof svgMap] : null
 
     return (
         <>
@@ -57,7 +59,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isReversed, index })
             >
                 <div className={styles.imageContainer}>
                     <div>
-                       { service.svgComponent && <service.svgComponent /> }
+                        {SvgComponent && <SvgComponent />}
                     </div>
                 </div>
 
