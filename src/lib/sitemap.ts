@@ -78,7 +78,7 @@ const getTotalSitemapCount = () => {
 export const getSitemapChunkCount = () =>
   Math.ceil(getTotalSitemapCount() / MAX_URLS_PER_SITEMAP)
 
-export const getSitemapUrl = (index: number) => `${baseUrl}/sitemap-${index + 1}.xml`
+export const getSitemapUrl = (index: number) => `${baseUrl}/sitemap/${index + 1}.xml`
 
 export const buildSitemapIndexXml = () => {
   const sitemapUrls = Array.from({ length: getSitemapChunkCount() }, (_, index) => ({

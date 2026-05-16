@@ -20,6 +20,16 @@ const nextConfig: NextConfig = {
   // Compression
   compress: true,
 
+  async redirects() {
+    return [
+      {
+        source: '/sitemap-:index(\\d+).xml',
+        destination: '/sitemap/:index.xml',
+        permanent: true,
+      },
+    ]
+  },
+
   // Headers for better SEO and performance
   async headers() {
     return [

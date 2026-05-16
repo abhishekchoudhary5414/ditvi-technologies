@@ -4,7 +4,7 @@ export const revalidate = false
 
 export async function GET(request: Request) {
   const pathname = new URL(request.url).pathname
-  const match = pathname.match(/\/sitemap-(\d+)\.xml$/)
+  const match = pathname.match(/\/sitemap\/(\d+)\.xml$/)
   const chunkIndex = match ? Number(match[1]) - 1 : -1
 
   if (!match || !Number.isInteger(chunkIndex) || chunkIndex < 0) {
