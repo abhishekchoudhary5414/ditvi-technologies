@@ -138,120 +138,100 @@ export const getSitemapChunk = (chunkIndex: number): SitemapEntry[] => {
   const state = { position: 0, collected: [] as SitemapEntry[] }
 
   addGroup(coreRoutes.length, state, () => {
-    coreRoutes.forEach((route) =>
-      createEntryInRange(
-        `${baseUrl}${route}`,
-        1,
-        'monthly',
-        startIndex,
-        endIndex,
-        state
-      )
-    )
+    for (const route of coreRoutes) {
+      if (state.position >= endIndex) break;
+      if (state.position >= startIndex) {
+        state.collected.push(createSitemapEntry(`${baseUrl}${route}`, 1, 'monthly'));
+      }
+      state.position++;
+    }
   }, startIndex, endIndex)
 
   addGroup(services.length, state, () => {
-    services.forEach((service) =>
-      createEntryInRange(
-        `${baseUrl}${service.path}`,
-        0.8,
-        'monthly',
-        startIndex,
-        endIndex,
-        state
-      )
-    )
+    for (const service of services) {
+      if (state.position >= endIndex) break;
+      if (state.position >= startIndex) {
+        state.collected.push(createSitemapEntry(`${baseUrl}${service.path}`, 0.8, 'monthly'));
+      }
+      state.position++;
+    }
   }, startIndex, endIndex)
 
   addGroup(services.length * modifierKeys.length, state, () => {
-    services.forEach((service) => {
-      const serviceSlug = normalizeServiceSlug(service.path)
-      modifierKeys.forEach((modifier) =>
-        createEntryInRange(
-          `${baseUrl}/services/${modifier}-${serviceSlug}`,
-          0.8,
-          'monthly',
-          startIndex,
-          endIndex,
-          state
-        )
-      )
-    })
+    for (const service of services) {
+      if (state.position >= endIndex) break;
+      const serviceSlug = normalizeServiceSlug(service.path);
+      for (const modifier of modifierKeys) {
+        if (state.position >= endIndex) break;
+        if (state.position >= startIndex) {
+          state.collected.push(createSitemapEntry(`${baseUrl}/services/${modifier}-${serviceSlug}`, 0.8, 'monthly'));
+        }
+        state.position++;
+      }
+    }
   }, startIndex, endIndex)
 
   addGroup(blogPosts.length, state, () => {
-    blogPosts.forEach((post) =>
-      createEntryInRange(
-        `${baseUrl}/blog/${post.slug}`,
-        0.7,
-        'weekly',
-        startIndex,
-        endIndex,
-        state
-      )
-    )
+    for (const post of blogPosts) {
+      if (state.position >= endIndex) break;
+      if (state.position >= startIndex) {
+        state.collected.push(createSitemapEntry(`${baseUrl}/blog/${post.slug}`, 0.7, 'weekly'));
+      }
+      state.position++;
+    }
   }, startIndex, endIndex)
 
   addGroup(clients.length, state, () => {
-    clients.forEach((client) =>
-      createEntryInRange(
-        `${baseUrl}/client/${client.slug}`,
-        0.6,
-        'monthly',
-        startIndex,
-        endIndex,
-        state
-      )
-    )
+    for (const client of clients) {
+      if (state.position >= endIndex) break;
+      if (state.position >= startIndex) {
+        state.collected.push(createSitemapEntry(`${baseUrl}/client/${client.slug}`, 0.6, 'monthly'));
+      }
+      state.position++;
+    }
   }, startIndex, endIndex)
 
   const cityCount = cityRoutes.length
   addGroup(services.length * cityCount, state, () => {
-    services.forEach((service) => {
-      const baseUrlPath = `${baseUrl}${service.path}`
-      cityRoutes.forEach((city) =>
-        createEntryInRange(
-          `${baseUrlPath}${city.slug}`,
-          0.5,
-          'monthly',
-          startIndex,
-          endIndex,
-          state
-        )
-      )
-    })
+    for (const service of services) {
+      if (state.position >= endIndex) break;
+      const baseUrlPath = `${baseUrl}${service.path}`;
+      for (const city of cityRoutes) {
+        if (state.position >= endIndex) break;
+        if (state.position >= startIndex) {
+          state.collected.push(createSitemapEntry(`${baseUrlPath}${city.slug}`, 0.5, 'monthly'));
+        }
+        state.position++;
+      }
+    }
   }, startIndex, endIndex)
 
   addGroup(services.length * modifierKeys.length * cityCount, state, () => {
-    services.forEach((service) => {
-      const serviceSlug = normalizeServiceSlug(service.path)
-      modifierKeys.forEach((modifier) => {
-        const modifierUrl = `${baseUrl}/services/${modifier}-${serviceSlug}`
-        cityRoutes.forEach((city) =>
-          createEntryInRange(
-            `${modifierUrl}${city.slug}`,
-            0.5,
-            'monthly',
-            startIndex,
-            endIndex,
-            state
-          )
-        )
-      })
-    })
+    for (const service of services) {
+      if (state.position >= endIndex) break;
+      const serviceSlug = normalizeServiceSlug(service.path);
+      for (const modifier of modifierKeys) {
+        if (state.position >= endIndex) break;
+        const modifierUrl = `${baseUrl}/services/${modifier}-${serviceSlug}`;
+        for (const city of cityRoutes) {
+          if (state.position >= endIndex) break;
+          if (state.position >= startIndex) {
+            state.collected.push(createSitemapEntry(`${modifierUrl}${city.slug}`, 0.5, 'monthly'));
+          }
+          state.position++;
+        }
+      }
+    }
   }, startIndex, endIndex)
 
   addGroup(externalRoutes.length, state, () => {
-    externalRoutes.forEach((entry) =>
-      createEntryInRange(
-        entry.url,
-        entry.priority,
-        entry.changeFrequency,
-        startIndex,
-        endIndex,
-        state
-      )
-    )
+    for (const entry of externalRoutes) {
+      if (state.position >= endIndex) break;
+      if (state.position >= startIndex) {
+        state.collected.push(createSitemapEntry(entry.url, entry.priority, entry.changeFrequency));
+      }
+      state.position++;
+    }
   }, startIndex, endIndex)
 
   return state.collected
