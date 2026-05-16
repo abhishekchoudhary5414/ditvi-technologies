@@ -1,4 +1,4 @@
-import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin } from 'react-icons/fi';
+import { FiFacebook, FiInstagram, FiYoutube } from 'react-icons/fi';
 import type { ReactNode } from 'react';
 
 interface SocialLink {
@@ -14,12 +14,10 @@ interface ContactDetails {
 }
 
 export const socialLinks: SocialLink[] = [
-  { icon: <FiFacebook />, href: 'https://facebook.com' },
-  { icon: <FiTwitter />, href: 'https://twitter.com' },
-  { icon: <FiInstagram />, href: 'https://instagram.com' },
-  { icon: <FiLinkedin />, href: 'https://linkedin.com' },
+  { icon: <FiFacebook />, href: 'https://www.facebook.com/ditvifoundation' },
+  { icon: <FiInstagram />, href: 'https://www.instagram.com/ditvifoundation/' },
+  { icon: <FiYoutube />, href: 'https://www.youtube.com/@ditvifoundation' },
 ];
-
 export const contactDetails: ContactDetails = {
   email: 'care@ditvi.org',
   number: '+91 9285248504',

@@ -5,6 +5,7 @@ import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import styles from './Footer.module.css'
 import { socialLinks } from '@/json/ditviinfo'
 import { contactDetails } from '@/json/ditviinfo'
+import { services } from '@/json/services'
 
 const quickLinks = [
     { name: 'Home', href: '/' },
@@ -13,15 +14,6 @@ const quickLinks = [
     { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
 ]
-
-const services = [
-    { name: 'Digital Presence', href: '/services/digital-presence' },
-    { name: 'Wedding Website', href: '/services/wedding-website' },
-    { name: 'Birthday Website', href: '/services/birthday-website' },
-]
-
-
-
 const Footer = () => {
     const year = new Date().getFullYear()
 
@@ -75,7 +67,7 @@ const Footer = () => {
                             <ul>
                                 {services.map((service, index) => (
                                     <li key={index}>
-                                        <Link href={service.href}>{service.name}</Link>
+                                        <Link href={service.path}>{service.title}</Link>
                                     </li>
                                 ))}
                             </ul>
