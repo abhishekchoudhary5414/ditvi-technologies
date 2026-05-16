@@ -5,7 +5,7 @@
     right: 0;
     background: var(--card-background);
     border-bottom: 1px solid var(--border-color);
-    z-index: 40;
+    z-index: 100;
     padding: 0.75rem 0;
 }
 
@@ -16,6 +16,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 }
 
 .brand {
@@ -30,6 +31,11 @@
     color: var(--text-primary);
 }
 
+.logoImage {
+    display: block;
+    object-fit: contain;
+}
+
 .mobileMenuButton {
     display: none;
     background: none;
@@ -42,12 +48,14 @@
 .menuContainer {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
 }
 
 .menu {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -57,17 +65,17 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 0.9rem;
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
+    border-radius: 999px;
+    transition: all 0.25s ease;
     position: relative;
 }
 
 .menuItem:hover {
     color: var(--text-primary);
-    background: var(--card-hover);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .menuItem.active {
@@ -83,6 +91,12 @@
     height: 2px;
     background: var(--primary-color);
     border-radius: 1px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .userSection {
@@ -102,17 +116,35 @@
     color: var(--text-secondary);
 }
 
-.logoutButton {
-    display: flex;
+.whatsappButton {
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.65rem 1rem;
+    background: #25D366;
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid rgba(37, 211, 102, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.whatsappButton:hover {
+    transform: translateY(-1px);
+    background: #1ebe58;
+}
+
+.logoutButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     background: var(--error-light);
     color: var(--error-color);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .logoutButton:hover {
@@ -123,41 +155,60 @@
 .backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 30;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 90;
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .mobileMenuButton {
         display: block;
     }
 
     .menuContainer {
         position: fixed;
-        top: 72px;
+        top: 64px;
         left: 0;
         right: 0;
         bottom: 0;
         background: var(--card-background);
         flex-direction: column;
-        padding: 1.5rem;
-        transform: translateX(-100%);
+        align-items: stretch;
+        padding: 1rem 1.5rem;
+        transform: translateY(-110%);
         transition: transform 0.3s ease;
-        z-index: 35;
+        justify-content: start;
+        z-index: 99;
+        overflow-y: auto;
     }
 
     .menuContainer.mobileOpen {
-        transform: translateX(0);
+        transform: translateY(0);
     }
 
     .menu {
         flex-direction: column;
+        gap: 0.75rem;
         width: 100%;
     }
 
     .menuItem {
-        padding: 1rem;
+        width: 100%;
+        padding: 1rem 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .whatsappButton,
+    .logoutButton {
+        width: 100%;
+        justify-content: center;
     }
 
     .userSection {
@@ -167,11 +218,6 @@
     }
 
     .userInfo {
-        justify-content: center;
-    }
-
-    .logoutButton {
-        width: 100%;
         justify-content: center;
     }
 

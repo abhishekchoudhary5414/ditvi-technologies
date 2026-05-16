@@ -2,13 +2,14 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import clsx from 'clsx';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
 import { FaWhatsapp } from 'react-icons/fa';
 import { contactDetails } from '@/json/ditviinfo'
-
+import { supabase } from '@/lib/supabase'
 
 
 interface LinkItem {
@@ -27,9 +28,44 @@ const navItems: LinkItem[] = [
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-    const whatsappMessage = encodeURIComponent(
+  const pathname = usePathname();
+  const whatsappMessage = encodeURIComponent(
     "Hi Ditvi Technologies, I'm interested in your services. Can you help me?"
   );
+
+    const parseBrowser = (ua: string) => {
+      if (/chrome|chromium|crios/i.test(ua) && !/edg/i.test(ua)) return 'Chrome'
+      if (/firefox|fxios/i.test(ua)) return 'Firefox'
+      if (/safari/i.test(ua) && !/chrome|chromium|crios/i.test(ua)) return 'Safari'
+      if (/edg/i.test(ua)) return 'Edge'
+      if (/opera|opr/i.test(ua)) return 'Opera'
+      return 'Other'
+    }
+
+    const parseDeviceType = (ua: string) => {
+      if (/mobile|iphone|ipod|android|blackberry|iemobile|opera mini/i.test(ua)) return 'Mobile'
+      if (/ipad|tablet|tab/i.test(ua)) return 'Tablet'
+      return 'Desktop'
+    }
+
+    const trackWhatsAppClick = async () => {
+      try {
+        const userAgent = navigator.userAgent || ''
+        await supabase.from('whatsapp_clicks').insert([
+          {
+            page_url: window.location.pathname,
+            page_title: document.title || null,
+            referrer: document.referrer || null,
+            browser: parseBrowser(userAgent),
+            device_type: parseDeviceType(userAgent),
+            user_agent: userAgent,
+            clicked_at: new Date().toISOString(),
+          },
+        ])
+      } catch (error) {
+        console.error('WhatsApp click tracking failed:', error)
+      }
+    }
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -97,6 +133,7 @@ const Navbar: React.FC = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"
+        onClick={trackWhatsAppClick}
       >
         <FaWhatsapp size={24} />
         <span className={styles.whatsappTooltip}>

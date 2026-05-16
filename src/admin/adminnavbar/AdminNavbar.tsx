@@ -1,13 +1,16 @@
 'use client'
-import { useState, useEffect } from 'react'
+
+import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-    FiGrid, FiMessageSquare, FiPhone, 
-    FiLogOut, FiMenu, FiX, FiUser 
+import {
+    FiGrid, FiMessageSquare, FiPhone,
+    FiLogOut, FiMenu, FiX, FiPhoneForwarded
 } from 'react-icons/fi'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { contactDetails } from '@/json/ditviinfo'
 import styles from './AdminNavbar.module.css'
 
 const menuItems = [
@@ -17,14 +20,19 @@ const menuItems = [
         path: '/admin/dashboard'
     },
     {
-        title: 'Contacts',
+        title: 'Contact Dashboard',
         icon: <FiMessageSquare />,
         path: '/admin/dashboard/contact'
     },
     {
-        title: 'Enquiries',
+        title: 'Enquiry Dashboard',
         icon: <FiPhone />,
         path: '/admin/dashboard/enquiry'
+    },
+    {
+        title: 'Whatsapp Dashboard',
+        icon: <FiPhoneForwarded />,
+        path: '/admin/dashboard/whatsapp'
     }
 ]
 
@@ -32,16 +40,7 @@ const AdminNavbar = () => {
     const router = useRouter()
     const pathname = usePathname()
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const [userName, setUserName] = useState<string | null>(null)
     const supabase = createClientComponentClient()
-
-    useEffect(() => {
-        const getUser = async () => {
-            const { data: { user } } = await supabase.auth.getUser()
-            setUserName(user?.email?.split('@')[0] || 'Admin')
-        }
-        getUser()
-    }, [supabase.auth])
 
     const handleLogout = async () => {
         try {
@@ -58,9 +57,15 @@ const AdminNavbar = () => {
                 <div className={styles.container}>
                     <div className={styles.brand}>
                         <Link href="/admin/dashboard">
-                            <span className={styles.logo}>Admin Panel</span>
+                            <Image
+                                src="/logo.png"
+                                alt="Ditvi Technologies"
+                                width={140}
+                                height={42}
+                                className={styles.logoImage}
+                            />
                         </Link>
-                        <button 
+                        <button
                             className={styles.mobileMenuButton}
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
@@ -72,11 +77,10 @@ const AdminNavbar = () => {
                         <ul className={styles.menu}>
                             {menuItems.map((item) => (
                                 <li key={item.path}>
-                                    <Link 
+                                    <Link
                                         href={item.path}
-                                        className={`${styles.menuItem} ${
-                                            pathname === item.path ? styles.active : ''
-                                        }`}
+                                        className={`${styles.menuItem} ${pathname === item.path ? styles.active : ''
+                                            }`}
                                         onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         {item.icon}
@@ -92,23 +96,21 @@ const AdminNavbar = () => {
                             ))}
                         </ul>
 
-                        <div className={styles.userSection}>
-                            <div className={styles.userInfo}>
-                                <FiUser />
-                                <span>{userName}</span>
-                            </div>
-                            <button 
-                                className={styles.logoutButton}
-                                onClick={handleLogout}
-                            >
-                                <FiLogOut />
-                                <span>Logout</span>
-                            </button>
-                        </div>
+
+                    </div>
+                    <div className={styles.actions}>
+
+                        <button
+                            className={styles.logoutButton}
+                            onClick={handleLogout}
+                        >
+                            <FiLogOut />
+                            <span>Logout</span>
+                        </button>
                     </div>
                 </div>
             </nav>
-            
+
             {/* Mobile menu backdrop */}
             <AnimatePresence>
                 {isMobileMenuOpen && (

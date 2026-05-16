@@ -1,0 +1,349 @@
+.dashboard {
+  padding: 2rem 1.5rem;
+  /* max-width: 1280px; */
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.75rem, 2vw, 2.4rem);
+  color: var(--text-primary);
+}
+
+.header p {
+  margin: 0;
+  color: var(--text-secondary);
+  max-width: 720px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.statCard {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.statIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--primary-color);
+}
+
+.statLabel {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.statNumber {
+  margin: 0;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.panel {
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.panelHeader h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.filterGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filterGroup button {
+  border: 1px solid var(--border-color);
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.filterGroup button:hover,
+.filterGroup button:focus {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.activeFilter {
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.dateControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dateControls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.dateControls input {
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+}
+
+.trendingPanel {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.trendingPanel h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.trendingList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.trendingItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+}
+
+.trendingCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.trendingPage {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trendingEmpty {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.detailsButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.detailsButton:hover {
+  transform: translateY(-1px);
+  background: rgba(59, 130, 246, 0.9);
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.modal {
+  width: min(720px, 100%);
+  max-height: min(90vh, 820px);
+  overflow-y: auto;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+  position: relative;
+}
+
+.closeModal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--background-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.detailList {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.detailRow {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.detailLabel {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.detailValue {
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+.searchBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+}
+
+.searchBox input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  width: min(320px, 100%);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.clickTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.clickTable th,
+.clickTable td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  color: var(--text-primary);
+}
+
+.clickTable th {
+  color: var(--text-secondary);
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.clickTable tbody tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.truncated {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.loading,
+.empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .panelHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .clickTable {
+    min-width: 700px;
+  }
+}

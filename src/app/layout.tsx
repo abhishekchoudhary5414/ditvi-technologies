@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
 import JsonLd from "@/components/JsonLd";
-import PopupTrigger from '@/custom/getquotepopup/PopupTrigger'
+import LayoutWrapper from "./LayoutWrapper";
 
 
 
@@ -122,10 +120,9 @@ export default function RootLayout({
         <JsonLd data={jsonLdData} />
       </head>
       <body>
-        <Navbar />
-        <PopupTrigger />
-        {children}
-        <Footer />
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
       </body>
     </html>
   );

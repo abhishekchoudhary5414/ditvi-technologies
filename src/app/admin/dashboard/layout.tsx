@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import AdminNavbar from '@/admin/adminnavbar/AdminNavbar';
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -8,8 +7,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div className="dashboard-layout">
-      <AdminNavbar />
-      <main className="dashboard-main">
+      <main className="dashboard-main" style={{ paddingTop: '72px' }}>
         {children}
       </main>
     </div>
