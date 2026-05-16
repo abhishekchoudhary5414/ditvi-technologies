@@ -43,8 +43,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
-   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  verification: {
+    google: 'U61z9WvB238RUEavCgIuOpCpDLFPVOMv2i-Ax3ACxPI',
   },
   twitter: {
     card: 'summary_large_image',

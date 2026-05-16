@@ -16,8 +16,8 @@ const quickLinks = [
 
 const services = [
     { name: 'Digital Presence', href: '/services/digital-presence' },
-    { name: 'Celebration Birthday', href: '/services/celebration-birthday/' },
-    { name: 'Wedding Celebration', href: '/services/wedding-celebration' },
+    { name: 'Wedding Website', href: '/services/wedding-website' },
+    { name: 'Birthday Website', href: '/services/birthday-website' },
 ]
 
 
