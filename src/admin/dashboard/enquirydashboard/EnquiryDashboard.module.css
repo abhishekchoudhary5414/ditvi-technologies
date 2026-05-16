@@ -146,22 +146,13 @@
   transform: scale(1.01);
 }
 
-.tableRow.pending {
-  border-left: 4px solid var(--warning-color);
-}
-
-.tableRow.contacted {
-  border-left: 4px solid var(--info-color);
-}
-
-.tableRow.completed {
-  border-left: 4px solid var(--success-color);
-}
-
-.tableRow.archived {
-  border-left: 4px solid var(--text-secondary);
-  opacity: 0.7;
-}
+.tableRow.new { border-left: 4px solid #2196f3; }
+.tableRow.contacted { border-left: 4px solid #9c27b0; }
+.tableRow.not_received { border-left: 4px solid #ff9800; }
+.tableRow.interested { border-left: 4px solid #4caf50; }
+.tableRow.call_later { border-left: 4px solid #00bcd4; }
+.tableRow.not_interested { border-left: 4px solid #9e9e9e; opacity: 0.7; }
+.tableRow.spam { border-left: 4px solid #f44336; opacity: 0.7; }
 
 .table td {
   padding: 1rem;
@@ -181,25 +172,13 @@
   color: var(--text-secondary);
 }
 
-.statusBadge.pending {
-  background: rgba(255, 193, 7, 0.1);
-  color: #ffc107;
-}
-
-.statusBadge.contacted {
-  background: rgba(33, 150, 243, 0.1);
-  color: #2196f3;
-}
-
-.statusBadge.completed {
-  background: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
-}
-
-.statusBadge.archived {
-  background: rgba(158, 158, 158, 0.1);
-  color: #9e9e9e;
-}
+.statusBadge.new { background: rgba(33, 150, 243, 0.1); color: #2196f3; }
+.statusBadge.contacted { background: rgba(156, 39, 176, 0.1); color: #9c27b0; }
+.statusBadge.not_received { background: rgba(255, 152, 0, 0.1); color: #ff9800; }
+.statusBadge.interested { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
+.statusBadge.call_later { background: rgba(0, 188, 212, 0.1); color: #00bcd4; }
+.statusBadge.not_interested { background: rgba(158, 158, 158, 0.1); color: #9e9e9e; }
+.statusBadge.spam { background: rgba(244, 67, 54, 0.1); color: #f44336; }
 
 .actions {
   display: flex;
@@ -213,64 +192,63 @@
   gap: 0.5rem;
 }
 
-.statusBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 0.5rem;
-  background: var(--accent-light);
-  color: var(--text-secondary);
+/* Status Dropdown Design */
+.statusDropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 160px;
+}
+
+.statusDropdown:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statusDropdown:focus {
+  outline: none;
+}
+
+.statusDropdown option {
+  background-color: var(--card-background);
+  color: var(--text-primary);
   font-weight: 500;
+  padding: 0.5rem;
 }
 
-.statusBtn:hover {
-  transform: translateY(-2px);
-}
+.statusDropdown.new { background-color: rgba(33, 150, 243, 0.1); color: #2196f3; border-color: rgba(33, 150, 243, 0.2); }
+.statusDropdown.new:focus { box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2); }
 
-.statusBtn.contacted {
-  background: rgba(33, 150, 243, 0.1);
-  color: #2196f3;
-}
+.statusDropdown.contacted { background-color: rgba(156, 39, 176, 0.1); color: #9c27b0; border-color: rgba(156, 39, 176, 0.2); }
+.statusDropdown.contacted:focus { box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2); }
 
-.statusBtn.contacted:hover {
-  background: #2196f3;
-  color: white;
-}
+.statusDropdown.not_received { background-color: rgba(255, 152, 0, 0.1); color: #ff9800; border-color: rgba(255, 152, 0, 0.2); }
+.statusDropdown.not_received:focus { box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2); }
 
-.statusBtn.completed {
-  background: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
-}
+.statusDropdown.interested { background-color: rgba(76, 175, 80, 0.1); color: #4caf50; border-color: rgba(76, 175, 80, 0.2); }
+.statusDropdown.interested:focus { box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); }
 
-.statusBtn.completed:hover {
-  background: #4caf50;
-  color: white;
-}
+.statusDropdown.call_later { background-color: rgba(0, 188, 212, 0.1); color: #00bcd4; border-color: rgba(0, 188, 212, 0.2); }
+.statusDropdown.call_later:focus { box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); }
 
-.statusBtn.archived {
-  background: rgba(244, 67, 54, 0.1);
-  color: #f44336;
-}
+.statusDropdown.not_interested { background-color: rgba(158, 158, 158, 0.1); color: #9e9e9e; border-color: rgba(158, 158, 158, 0.2); }
+.statusDropdown.not_interested:focus { box-shadow: 0 0 0 3px rgba(158, 158, 158, 0.2); }
 
-.statusBtn.archived:hover {
-  background: #f44336;
-  color: white;
-}
-
-.statusLabel {
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.5rem;
-  background: rgba(158, 158, 158, 0.1);
-  color: #9e9e9e;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
+.statusDropdown.spam { background-color: rgba(244, 67, 54, 0.1); color: #f44336; border-color: rgba(244, 67, 54, 0.2); }
+.statusDropdown.spam:focus { box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2); }
 
 .actionBtn {
   display: flex;
