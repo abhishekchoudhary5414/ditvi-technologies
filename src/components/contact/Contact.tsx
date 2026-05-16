@@ -33,14 +33,12 @@ const contactInfo = [
 interface ContactFormValues {
     name: string
     number: string
-    subject: string
     message: string
 }
 
 const initialValues: ContactFormValues = {
     name: '',
     number: '',
-    subject: '',
     message: ''
 }
 
@@ -49,10 +47,8 @@ const validationSchema = Yup.object({
         .matches(/^[A-Za-z\s]+$/, 'Please enter alphabets only')
         .required('Name is required'),
     number: Yup.string()
-        .matches(/^[6-9]\d{9}$/, 'Enter valid 10-digit number starting with 6-9')
+        .matches(/^\+?[0-9]+$/, "Please enter digits and '+' only")
         .required('Phone number is required'),
-    subject: Yup.string()
-        .required('Subject is required'),
     message: Yup.string()
         .required('Message is required')
 })
@@ -148,19 +144,28 @@ const Contact = () => {
                                 </div>
 
                                 <div className={styles.formGroup}>
-                                    <Field
-                                        type="tel"
-                                        name="number"
-                                        placeholder="Your Number"
-                                        maxLength={10}
-                                        className={errors.number && touched.number ? styles.errorInput : ''}
-                                    />
+                                    <Field name="number">
+                                        {({ field }: { field: any }) => (
+                                            <input
+                                                {...field}
+                                                type="text"
+                                                placeholder="Your Number"
+                                                inputMode="tel"
+                                                pattern="\+?[0-9]*"
+                                                maxLength={13}
+                                                className={errors.number && touched.number ? styles.errorInput : ''}
+                                                onInput={(event) => {
+                                                    const target = event.currentTarget as HTMLInputElement
+                                                    target.value = target.value.replace(/[^0-9+]/g, '')
+                                                    field.onChange(event)
+                                                }}
+                                            />
+                                        )}
+                                    </Field>
                                     {errors.number && touched.number && (
                                         <span className={styles.errorText}>{errors.number}</span>
                                     )}
                                 </div>
-
-
 
                                 <div className={styles.formGroup}>
                                     <Field

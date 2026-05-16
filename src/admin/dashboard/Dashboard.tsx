@@ -21,7 +21,6 @@ interface BaseItem {
 interface Contact extends BaseItem {
     type: 'contact'
     number: string
-    subject: string
     message: string
     status: ContactStatus
 }
@@ -71,7 +70,7 @@ const AdminDashboard = () => {
             const [contactsResponse, enquiriesResponse] = await Promise.all([
                 supabase
                     .from('contacts')
-                    .select('id, name, number, subject, message, status, created_at')
+                    .select('id, name, number, message, status, created_at')
                     .order('created_at', { ascending: false }),
                 supabase
                     .from('quotes') // This table contains enquiries
@@ -184,7 +183,7 @@ const AdminDashboard = () => {
             const matchesView = currentView === 'all' || item.type === currentView.slice(0, -1)
             const matchesStatus = statusFilter === 'all' || item.status === statusFilter
             const searchText = item.type === 'contact'
-                ? `${item.name} ${item.number} ${item.subject} ${item.message}`
+                ? `${item.name} ${item.number} ${item.message}`
                 : `${item.name} ${item.phone} ${item.service}`
             const matchesSearch = searchText.toLowerCase().includes(searchQuery.toLowerCase())
 
@@ -347,7 +346,6 @@ const AdminDashboard = () => {
 
                                     {item.type === 'contact' ? (
                                         <>
-                                            <p className={styles.subject}>{item.subject}</p>
                                             <p className={styles.contact}>{item.number}</p>
                                         </>
                                     ) : (
@@ -490,10 +488,6 @@ const AdminDashboard = () => {
                                 {selectedItem.type === 'contact' ? (
                                     <div className={styles.modalSection}>
                                         <h3>Message Details</h3>
-                                        <div className={styles.modalField}>
-                                            <label>Subject</label>
-                                            <span>{selectedItem.subject}</span>
-                                        </div>
                                         <div className={styles.modalField}>
                                             <label>Message</label>
                                             <p className={styles.message}>{selectedItem.message}</p>

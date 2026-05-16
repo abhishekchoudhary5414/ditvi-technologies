@@ -124,6 +124,20 @@ const GetQuotePopup: React.FC<GetQuotePopupProps> = ({
       }
     }
 
+    if (name === 'phone') {
+      let sanitized = value.replace(/[^0-9+]/g, '')
+      sanitized = sanitized.startsWith('+')
+        ? '+' + sanitized.slice(1).replace(/\+/g, '')
+        : sanitized.replace(/\+/g, '')
+
+      setErrors(prev => ({
+        ...prev,
+        phone: ''
+      }))
+      setFormData(prev => ({ ...prev, phone: sanitized }))
+      return
+    }
+
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
