@@ -5,20 +5,41 @@ const nextConfig: NextConfig = {
 
   // Image optimization
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'], // AVIF first for better compression
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 60 * 60 * 24 * 365, // Cache for 1 year
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Performance optimizations
   experimental: {
     optimizeCss: true,
     scrollRestoration: true,
+    optimizePackageImports: [
+      "@mui/icons-material",
+      "react-icons",
+      "framer-motion",
+    ],
   },
 
   // Compression
   compress: true,
+
+  // CSS optimization
+  onDemandEntries: {
+    maxInactiveAge: 60 * 1000,
+    pagesBufferLength: 5,
+  },
+
+  // Turbopack handles CSS optimization automatically with optimizeCss: true
+  turbopack: {
+    // Configure Turbopack for better CSS handling
+    resolveAlias: {
+      "@": "./src",
+    },
+  },
 
   async redirects() {
     return [
@@ -47,6 +68,10 @@ const nextConfig: NextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
+          },
+          {
+            key: 'Link',
+            value: '</styles.css>; rel=preload; as=style',
           },
         ],
       },

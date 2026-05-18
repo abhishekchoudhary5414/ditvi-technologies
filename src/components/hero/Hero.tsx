@@ -1,24 +1,27 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
 import Button from '@/custom/buttons/Button'
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  // Track if component mounted to enable animations, but render content immediately
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
+    // Set mounted after first render to enable animations
+    setMounted(true)
   }, [])
 
   return (
     <section className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.content}>
+          {/* Render text content immediately (visible on initial render) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-            transition={{ duration: 0.6 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+            transition={mounted ? { duration: 0.6 } : undefined}
             className={styles.textContent}
           >
             <h1 className={styles.title}>
@@ -40,10 +43,11 @@ const Hero = () => {
             </div>
           </motion.div>
 
+          {/* Animate image container with reduced delay */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={false}
+            animate={mounted ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+            transition={mounted ? { duration: 0.8, delay: 0.1 } : undefined}
             className={styles.imageContainer}
           >
             <div className={styles.imageWrapper}>
@@ -56,6 +60,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
+        {/* Animate stats with reduced delay */}
         <div className={styles.stats}>
           {[
             { number: '500+', text: 'Projects Completed' },
@@ -64,9 +69,9 @@ const Hero = () => {
           ].map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+              initial={false}
+              animate={mounted ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+              transition={mounted ? { duration: 0.6, delay: 0.2 + index * 0.05 } : undefined}
               className={styles.statItem}
             >
               <span className={styles.statNumber}>{stat.number}</span>

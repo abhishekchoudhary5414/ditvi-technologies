@@ -118,6 +118,71 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <JsonLd data={jsonLdData} />
+        
+        {/* Critical resource preconnection */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Prefetch external resources */}
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+        
+        {/* Preload fonts for faster text rendering */}
+        <link
+          rel="preload"
+          href="https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        
+        {/* Force parallel CSS loading and prevent chaining */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.__cssPreload = [];
+              
+              // Observe stylesheet additions and preload them immediately
+              const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                  if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach((node) => {
+                      if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+                        const href = node.getAttribute('href');
+                        const isCritical = ['Hero', 'Navbar', 'navbar', 'hero', 'layout', 'globals'].some(p => href?.includes(p));
+                        
+                        if (!isCritical) {
+                          // Preload non-critical CSS immediately to load in parallel
+                          const preload = document.createElement('link');
+                          preload.rel = 'preload';
+                          preload.as = 'style';
+                          preload.href = href;
+                          preload.onload = () => {
+                            node.media = 'all';
+                          };
+                          document.head.insertBefore(preload, node);
+                          node.media = 'print';
+                          window.__cssPreload.push(href);
+                        }
+                      }
+                    });
+                  }
+                });
+              });
+              
+              observer.observe(document.head, { childList: true, subtree: false });
+              
+              // Fallback: load CSS after DOM ready
+              document.addEventListener('DOMContentLoaded', () => {
+                const links = document.querySelectorAll('link[rel=stylesheet]');
+                links.forEach(link => {
+                  if (link.media === 'print') {
+                    link.media = 'all';
+                  }
+                });
+              });
+            `,
+          }}
+        />
       </head>
       <body>
         <LayoutWrapper>
