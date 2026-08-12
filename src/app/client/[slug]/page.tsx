@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import ProjectView from '@/components/projectview/ProjectView'
 import { clients } from '@/json/client'
+import JsonLd from '@/components/JsonLd'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,8 +40,22 @@ export default async function ProjectPage({ params }: PageProps) {
         notFound()
     }
 
+    const jsonLdData = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": client.name,
+        "description": client.project,
+        "url": `https://technologies.ditvi.org/client/${client.slug}`,
+        "publisher": {
+            "@type": "Organization",
+            "name": "Ditvi Technologies",
+            "url": "https://technologies.ditvi.org"
+        }
+    }
+
     return (
         <div className="project-page">
+            <JsonLd data={jsonLdData} />
             <ProjectView slug={resolvedParams.slug} />
         </div>
     )

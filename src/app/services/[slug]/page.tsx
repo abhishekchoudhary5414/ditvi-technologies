@@ -2,7 +2,8 @@ import { services } from '@/json/services';
 import ServiceDetail from '@/components/service/servicedetail/ServiceDetail';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { extractServiceModifier, getModifiedServiceTitle, getModifiedServiceDescription } from '@/data/serviceModifiers';
+// Service modifiers removed — use base service slugs directly
+import JsonLd from '@/components/JsonLd'
 
 export const dynamic = 'force-dynamic';
 
@@ -12,8 +13,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const { modifier, serviceSlug } = extractServiceModifier(resolvedParams.slug);
-  const service = services.find((s) => s.path === `/services/${serviceSlug}`);
+  const service = services.find((s) => s.path === `/services/${resolvedParams.slug}`);
 
   if (!service) {
     return {
@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const modifiedTitle = getModifiedServiceTitle(service.title, modifier);
-  const modifiedDescription = getModifiedServiceDescription(service.description, modifier);
+  const modifiedTitle = service.title;
+  const modifiedDescription = service.description;
 
   return {
     title: `${modifiedTitle} | Ditvi Technologies`,
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: `${modifiedTitle} | Ditvi Technologies`,
       description: modifiedDescription,
-      url: `https://ditvi.com/services/${resolvedParams.slug}`,
+      url: `https://technologies.ditvi.org/services/${resolvedParams.slug}`,
       siteName: 'Ditvi Technologies',
       type: 'website',
     }
@@ -41,8 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const resolvedParams = await params;
-  const { modifier, serviceSlug } = extractServiceModifier(resolvedParams.slug);
-  const service = services.find((s) => s.path === `/services/${serviceSlug}`);
+  const service = services.find((s) => s.path === `/services/${resolvedParams.slug}`);
 
   if (!service) {
     notFound();
@@ -50,12 +49,26 @@ export default async function Page({ params }: PageProps) {
 
   const modifiedService = {
     ...service,
-    title: getModifiedServiceTitle(service.title, modifier),
-    description: getModifiedServiceDescription(service.description, modifier),
+    title: service.title,
+    description: service.description,
   };
+
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": modifiedService.title,
+    "description": modifiedService.description,
+    "provider": {
+      "@type": "Organization",
+      "name": "Ditvi Technologies",
+      "url": "https://technologies.ditvi.org"
+    },
+    "url": `https://technologies.ditvi.org/services/${resolvedParams.slug}`
+  }
 
   return (
     <main className="service-page">
+      <JsonLd data={jsonLdData} />
       <ServiceDetail 
         service={modifiedService}
       />

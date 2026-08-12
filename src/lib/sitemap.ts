@@ -2,7 +2,6 @@ import { services } from '@/json/services'
 import { blogPosts } from '@/json/blog'
 import { clients } from '@/json/client'
 import { cityRoutes } from '@/data/cities'
-import { SERVICE_MODIFIERS } from '@/data/serviceModifiers'
 
 export const baseUrl = 'https://technologies.ditvi.org'
 export const now = new Date().toISOString()
@@ -32,7 +31,7 @@ const externalRoutes: SitemapEntry[] = [
   },
 ]
 
-const modifierKeys = Object.keys(SERVICE_MODIFIERS)
+// service modifiers removed; no modifier keys
 
 const xmlEscape = (value: string) =>
   value
@@ -55,23 +54,19 @@ const createSitemapEntry = (
 
 const createUrlEntry = (entry: SitemapEntry) => `  <url>\n    <loc>${xmlEscape(entry.url)}</loc>\n    <lastmod>${xmlEscape(entry.lastModified)}</lastmod>\n    <changefreq>${xmlEscape(entry.changeFrequency)}</changefreq>\n    <priority>${entry.priority.toFixed(1)}</priority>\n  </url>`
 
-const normalizeServiceSlug = (path: string) => path.replace(/^\/services\//, '')
+// normalizeServiceSlug removed — use service.path directly
 
 const getTotalSitemapCount = () => {
   const baseServiceCount = services.length
-  const modifierServiceCount = services.length * modifierKeys.length
   const cityServiceCount = services.length * cityRoutes.length
-  const modifierCityServiceCount = modifierServiceCount * cityRoutes.length
 
   return (
     coreRoutes.length +
     baseServiceCount +
-    modifierServiceCount +
     blogPosts.length +
     clients.length +
     externalRoutes.length +
-    cityServiceCount +
-    modifierCityServiceCount
+    cityServiceCount
   )
 }
 
@@ -157,19 +152,7 @@ export const getSitemapChunk = (chunkIndex: number): SitemapEntry[] => {
     }
   }, startIndex, endIndex)
 
-  addGroup(services.length * modifierKeys.length, state, () => {
-    for (const service of services) {
-      if (state.position >= endIndex) break;
-      const serviceSlug = normalizeServiceSlug(service.path);
-      for (const modifier of modifierKeys) {
-        if (state.position >= endIndex) break;
-        if (state.position >= startIndex) {
-          state.collected.push(createSitemapEntry(`${baseUrl}/services/${modifier}-${serviceSlug}`, 0.8, 'monthly'));
-        }
-        state.position++;
-      }
-    }
-  }, startIndex, endIndex)
+  // modifiers removed — no modifier-specific URLs
 
   addGroup(blogPosts.length, state, () => {
     for (const post of blogPosts) {
@@ -206,23 +189,7 @@ export const getSitemapChunk = (chunkIndex: number): SitemapEntry[] => {
     }
   }, startIndex, endIndex)
 
-  addGroup(services.length * modifierKeys.length * cityCount, state, () => {
-    for (const service of services) {
-      if (state.position >= endIndex) break;
-      const serviceSlug = normalizeServiceSlug(service.path);
-      for (const modifier of modifierKeys) {
-        if (state.position >= endIndex) break;
-        const modifierUrl = `${baseUrl}/services/${modifier}-${serviceSlug}`;
-        for (const city of cityRoutes) {
-          if (state.position >= endIndex) break;
-          if (state.position >= startIndex) {
-            state.collected.push(createSitemapEntry(`${modifierUrl}${city.slug}`, 0.5, 'monthly'));
-          }
-          state.position++;
-        }
-      }
-    }
-  }, startIndex, endIndex)
+  // modifiers removed — no modifier-specific city URLs
 
   addGroup(externalRoutes.length, state, () => {
     for (const entry of externalRoutes) {
