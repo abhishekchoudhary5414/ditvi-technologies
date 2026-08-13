@@ -3274,7 +3274,7 @@ export const services: ServiceItem[] = [
             }
         ],
 
-        svgComponent: 'SchoolWebsiteSVG',
+        svgComponent: 'SchoolWebsiteSvg',
 
         path: "/services/school-website",
 

@@ -1,4 +1,5 @@
 import WhatsAppDashboard from '@/admin/dashboard/whatsappdashboard/WhatsAppDashboard'
+import JsonLd from '@/components/JsonLd'
 
 export const metadata = {
   title: 'WhatsApp Dashboard | Ditvi Technologies',
@@ -6,5 +7,18 @@ export const metadata = {
 }
 
 export default function WhatsAppPage() {
-  return <WhatsAppDashboard />
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "WhatsApp Dashboard | Ditvi Technologies",
+    "url": "https://technologies.ditvi.org/admin/dashboard/whatsapp",
+    "description": "Track WhatsApp button clicks and page activity for Ditvi Technologies."
+  }
+
+  return (
+    <>
+      <JsonLd data={jsonLdData} />
+      <WhatsAppDashboard />
+    </>
+  )
 }

@@ -9,6 +9,7 @@ import GYMWebsiteSVG from '@/svg/GYMWebsiteSVG/GYMWebsiteSVG'
 import SalonWebsiteSVG from '@/svg/SalonWebsiteSVG/SalonSVG'
 import ConstructionWebsiteSVG from '@/svg/ConstructionWebsiteSVG/ConstructionWebsiteSVG'
 import InteriorWebsiteSVG from '@/svg/InteriorWebsiteSVG/InteriorWebsiteSVG'
+import SchoolWebsiteSvg from '@/svg/SchoolWebsiteSVG/SchoolWebsiteSVG'
 
 export const svgMap = {
   DigitalPresenceSVG,
@@ -22,4 +23,5 @@ export const svgMap = {
   SalonWebsiteSVG,
   ConstructionWebsiteSVG,
   InteriorWebsiteSVG,
+  SchoolWebsiteSvg
 } as const
