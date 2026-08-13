@@ -3,6 +3,14 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
 import Button from '@/custom/buttons/Button'
+import CodeIcon from '@mui/icons-material/Code'
+import DesignServicesIcon from '@mui/icons-material/DesignServices'
+import CloudIcon from '@mui/icons-material/Cloud'
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
+import StorageIcon from '@mui/icons-material/Storage'
+import SecurityIcon from '@mui/icons-material/Security'
+import BuildIcon from '@mui/icons-material/Build'
 
 const Hero = () => {
   // Track if component mounted to enable animations, but render content immediately
@@ -15,6 +23,18 @@ const Hero = () => {
 
   return (
     <section className={styles.hero}>
+      <div className={styles.bgIcons} aria-hidden="true">
+        {[
+          { Icon: StorageIcon, pos: { top: '8%', left: '6%', transform: 'scale(2.6)' }, key: 'bg-storage' },
+          { Icon: SecurityIcon, pos: { top: '22%', right: '6%', transform: 'scale(2.2)' }, key: 'bg-security' },
+          { Icon: BuildIcon, pos: { bottom: '6%', left: '10%', transform: 'scale(2.4)' }, key: 'bg-build' },
+          { Icon: CloudIcon, pos: { bottom: '12%', right: '12%', transform: 'scale(2.0)' }, key: 'bg-cloud' }
+        ].map(it => (
+          <div key={it.key} className={styles.bgIcon} style={it.pos}>
+            <it.Icon />
+          </div>
+        ))}
+      </div>
       <div className={styles.container}>
         <div className={styles.content}>
           {/* Render text content immediately (visible on initial render) */}
@@ -52,9 +72,26 @@ const Hero = () => {
           >
             <div className={styles.imageWrapper}>
               <div className={styles.shapes}>
-                <div className={`${styles.shape} ${styles.shape1}`}></div>
-                <div className={`${styles.shape} ${styles.shape2}`}></div>
-                <div className={`${styles.shape} ${styles.shape3}`}></div>
+                {[
+                  { Icon: CodeIcon, pos: { top: '-40px', right: '-40px' }, key: 'code' },
+                  { Icon: DesignServicesIcon, pos: { top: '20%', left: '-30px' }, key: 'design' },
+                  { Icon: CloudIcon, pos: { bottom: '-30px', left: '10%' }, key: 'cloud' },
+                  { Icon: PhoneIphoneIcon, pos: { bottom: '10%', right: '8%' }, key: 'phone' },
+                  { Icon: AnalyticsIcon, pos: { top: '45%', right: '30%' }, key: 'analytics' }
+                ].map((it, idx) => (
+                  <motion.div
+                    key={it.key}
+                    className={styles.iconShape}
+                    style={it.pos}
+                    initial={{ opacity: 0, y: 20, scale: 0.85 }}
+                    animate={mounted ? { opacity: 1, y: 0, scale: 1 } : { opacity: 1 }}
+                    transition={{ delay: 0.12 * idx, type: 'spring', stiffness: 120 }}
+                  >
+                    <div className={styles.iconInner}>
+                      <it.Icon fontSize="large" />
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </motion.div>
