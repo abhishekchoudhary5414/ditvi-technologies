@@ -71,9 +71,10 @@
 
 .dropdownMenu {
     position: absolute;
-    top: calc(100% + 0.5rem);
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    margin-top: 0.2rem;
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 8px 24px rgba(0,0,0,0.12);
@@ -81,6 +82,7 @@
     min-width: 220px;
     display: none;
     z-index: 1100;
+    pointer-events: auto;
 }
 
 .dropdownMenu.show {
@@ -217,6 +219,24 @@
     padding-left: 0.75rem;
     border-left: 2px solid rgba(0,0,0,0.04);
     margin-top: 0.5rem;
+}
+
+/* Make mobile menu scrollable and touch-friendly */
+.mobileMenu {
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1200;
+}
+
+/* Add a small invisible hover-bridge to avoid mouseleave gap between trigger and menu */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 8px;
 }
 
 /* Mobile menu top WhatsApp link */

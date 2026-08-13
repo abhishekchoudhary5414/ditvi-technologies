@@ -96,9 +96,9 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: '/logo/circlelogo.png',
-        width: 512,
-        height: 512,
+        url: 'https://technologies.ditvi.org/logo/circlelogo.png',
+        width: 1200,
+        height: 630,
         alt: "Ditvi Technologies - Web Development, SEO & Digital Solutions",
       },
     ],
@@ -117,7 +117,7 @@ export const metadata: Metadata = {
       "Website development, SEO, digital marketing, branding, e-commerce and business automation solutions by Ditvi Technologies.",
 
     images: [
-      "/logo/circlelogo.png",
+      "https://technologies.ditvi.org/logo/circlelogo.png",
     ],
   },
 
@@ -166,7 +166,7 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "Ditvi Technologies",
     "url": "https://technologies.ditvi.org",
-    "logo": "/logo/logo.png",
+    "logo": "https://technologies.ditvi.org/logo/circlelogo.png",
     "description": "Ditvi Technologies provides premium digital solutions including biodata creation, resume services, and digital celebrations. Transform your digital presence with our professional services.",
     "contactPoint": {
       "@type": "ContactPoint",
