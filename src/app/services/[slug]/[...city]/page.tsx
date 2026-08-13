@@ -33,7 +33,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${modifiedTitle} in ${cityData.name} | ${cityData.state} | ${cityData.country} | Ditvi Technologies`,
-    description: `${modifiedDescription}`
+    description: `${modifiedDescription}`,
+    openGraph: {
+      title: `${modifiedTitle} in ${cityData.name} | ${cityData.state} | ${cityData.country} | Ditvi Technologies`,
+      description: `${modifiedDescription}`,
+      url: `https://technologies.ditvi.org/services/${resolvedParams.slug}/${Array.isArray(resolvedParams.city) ? resolvedParams.city.join('/') : resolvedParams.city}`,
+      siteName: 'Ditvi Technologies',
+      type: 'website',
+      images: [
+        {
+          url: '/logo/circlelogo.png',
+          width: 512,
+          height: 512,
+          alt: modifiedTitle
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      images: ['/logo/circlelogo.png']
+    }
   };
 }
 

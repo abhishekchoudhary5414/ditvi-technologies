@@ -21,6 +21,18 @@ export const metadata: Metadata = {
     url: 'https://technologies.ditvi.org/services',
     siteName: 'Ditvi Technologies',
     type: 'website',
+    images: [
+      {
+        url: '/logo/circlelogo.png',
+        width: 512,
+        height: 512,
+        alt: 'Ditvi Technologies'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/logo/circlelogo.png']
   },
 };
 

@@ -23,6 +23,25 @@
     height: 4.5rem;
 }
 
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -44,6 +63,54 @@
     display: none;
     gap: 1.5rem;
     align-items: center;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 0.5rem;
+    min-width: 220px;
+    display: none;
+    z-index: 1100;
+}
+
+.dropdownMenu.show {
+    display: block;
+}
+
+.dropdownItem {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: #333;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    font-weight: 500;
+}
+
+.dropdownItem:hover {
+    background-color: rgba(255, 96, 0, 0.06);
+    color: #ff6000;
+}
+
+.dropdownIcon {
+    margin-left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+/* push icon to right in mobile menu link */
+.mobileMenuLink .dropdownIcon {
+    margin-left: auto;
 }
 
 .menuLink {
@@ -144,6 +211,66 @@
     }
 }
 
+.mobileSubMenu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(0,0,0,0.04);
+    margin-top: 0.5rem;
+}
+
+/* Mobile menu top WhatsApp link */
+.mobileTop {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+.mobileWhatsappLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #25D366;
+    color: #fff;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.mobileWhatsappLink:hover {
+    opacity: 0.95;
+}
+
+/* hide inline navbar WhatsApp button on small screens as it's included in mobile menu */
+@media (max-width: 767px) {
+    .right .desktopWhatsappLink {
+        display: none;
+    }
+}
+
+/* Desktop pill-style WhatsApp link */
+.desktopWhatsappLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: #25D366;
+    color: #fff;
+    padding: 0.45rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.desktopWhatsappLink span {
+    display: inline-block;
+}
+
+.desktopWhatsappLink:hover {
+    opacity: 0.95;
+}
+
 /* Large Desktop */
 @media (min-width: 1280px) {
     .container {
@@ -153,13 +280,11 @@
 
 
 .whatsappButton {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    position: relative;
     background-color: #25D366;
     color: white;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -167,7 +292,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1000;
 }
 
 .whatsappButton:hover {
@@ -198,13 +322,27 @@
 /* Add responsive styles for WhatsApp button */
 @media (max-width: 768px) {
     .whatsappButton {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        width: 3rem;
-        height: 3rem;
+        width: 2.75rem;
+        height: 2.75rem;
     }
 
     .whatsappTooltip {
         display: none;
+    }
+}
+
+.whatsappFixed {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .whatsappFixed {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }

@@ -8,7 +8,9 @@ import clsx from 'clsx';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
 import { FaWhatsapp } from 'react-icons/fa';
+import { AiOutlineDown } from 'react-icons/ai';
 import { contactDetails } from '@/json/ditviinfo'
+import { services } from '@/json/services'
 import { supabase } from '@/lib/supabase'
 
 
@@ -30,8 +32,11 @@ const Navbar: React.FC = () => {
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const whatsappMessage = encodeURIComponent(
-    "Hi Ditvi Technologies, I'm interested in your services. Can you help me?"
+    contactDetails.whatsappMessage || "Hi Ditvi Technologies, I'm interested in your services. Can you help me?"
   );
+
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
     const parseBrowser = (ua: string) => {
       if (/chrome|chromium|crios/i.test(ua) && !/edg/i.test(ua)) return 'Chrome'
@@ -87,57 +92,153 @@ const Navbar: React.FC = () => {
   }, []);
 
   const renderMenuItems = (isMobile = false) =>
-    navItems.map((item) => (
-      <Link
-        key={item.name}
-        href={item.path}
-        className={isMobile ? styles.mobileMenuLink : styles.menuLink}
-        onClick={handleNavigate}
-      >
-        {item.name}
-      </Link>
-    ));
+    navItems.map((item) => {
+      // Render services as a dropdown / submenu
+      if (item.name === 'Services') {
+        if (isMobile) {
+          return (
+            <div key="services-mobile">
+              <button
+                className={styles.mobileMenuLink}
+                onClick={() => setMobileServicesOpen((p) => !p)}
+                aria-expanded={mobileServicesOpen}
+              >
+                <span>{item.name}</span>
+                <span className={styles.dropdownIcon} aria-hidden>
+                  <AiOutlineDown />
+                </span>
+              </button>
+
+              {mobileServicesOpen && (
+                <div className={styles.mobileSubMenu}>
+                  {services.map((s) => (
+                    <Link
+                      key={s.id}
+                      href={s.path}
+                      className={styles.mobileMenuLink}
+                      onClick={() => {
+                        handleNavigate();
+                        setMobileServicesOpen(false);
+                      }}
+                    >
+                      {s.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        // Desktop dropdown (hover)
+        return (
+          <div
+            key="services-desktop"
+            className={styles.dropdown}
+            onMouseEnter={() => setDesktopServicesOpen(true)}
+            onMouseLeave={() => setDesktopServicesOpen(false)}
+          >
+            <Link href={item.path} className={styles.menuLink} onClick={handleNavigate} aria-haspopup="true">
+              <span>{item.name}</span>
+              <span className={styles.dropdownIcon} aria-hidden>
+                <AiOutlineDown />
+              </span>
+            </Link>
+
+            <div className={clsx(styles.dropdownMenu, { [styles.show]: desktopServicesOpen })}>
+              {services.map((s) => (
+                <Link key={s.id} href={s.path} className={styles.dropdownItem} onClick={handleNavigate}>
+                  {s.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <Link
+          key={item.name}
+          href={item.path}
+          className={isMobile ? styles.mobileMenuLink : styles.menuLink}
+          onClick={handleNavigate}
+        >
+          {item.name}
+        </Link>
+      );
+    });
 
   return (
     <>
       <nav className={styles.navbar} ref={navRef}>
         <div className={styles.container}>
           <div className={styles.navContent}>
-            <Link href="/" className={styles.logo}>
-              <Image 
-                src="/logo.png" 
-                alt="Ditvi Technologies" 
-                width={120} 
-                height={48} 
-                className={styles.logoImage}
-                priority
-                quality={70}
-              />
-            </Link>
+            <div className={styles.left}>
+              <Link href="/" className={styles.logo}>
+                <Image 
+                  src="/logo/logo.svg" 
+                  alt="Ditvi Technologies" 
+                  width={120} 
+                  height={48} 
+                  className={styles.logoImage}
+                  priority
+                  quality={70}
+                />
+              </Link>
+            </div>
 
+            <div className={styles.center}>
+              <div className={styles.desktopMenu}>{renderMenuItems(false)}</div>
+            </div>
 
-            <div className={styles.desktopMenu}>{renderMenuItems(false)}</div>
+            <div className={styles.right}>
+              <a
+                href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
+                className={styles.desktopWhatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact us on WhatsApp"
+                onClick={trackWhatsAppClick}
+              >
+                <FaWhatsapp size={18} />
+                <span>WhatsApp</span>
+              </a>
 
-
-            <button
-              className={clsx(styles.mobileMenuToggle, { [styles.active]: isOpen })}
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <IoMdClose size={24} /> : <IoMdMenu size={24} />}
-            </button>
+              <button
+                className={clsx(styles.mobileMenuToggle, { [styles.active]: isOpen })}
+                onClick={toggleMenu}
+                aria-label="Toggle menu"
+                aria-expanded={isOpen}
+              >
+                {isOpen ? <IoMdClose size={24} /> : <IoMdMenu size={24} />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
           <div className={clsx(styles.mobileMenu, { [styles.show]: isOpen })}>
+            <div className={styles.mobileTop}>
+              <a
+                href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
+                className={styles.mobileWhatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact us on WhatsApp"
+                onClick={() => { trackWhatsAppClick(); handleNavigate(); }}
+              >
+                <FaWhatsapp size={18} />
+                <span>Chat on WhatsApp</span>
+              </a>
+            </div>
+
             {renderMenuItems(true)}
           </div>
         </div>
       </nav>
+      {/* moved WhatsApp button inside nav for right alignment */}
       <a
         href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
-        className={styles.whatsappButton}
+        className={clsx(styles.whatsappButton, styles.whatsappFixed)}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"

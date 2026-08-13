@@ -64,7 +64,7 @@ const Login = () => {
             <div className={styles.loginCard}>
                 <div className={styles.logoContainer}>
                     <Image
-                        src="/logo.png"
+                        src="/logo/logo.svg"
                         alt="Ditvi Technologies Logo"
                         width={150}
                         height={50}

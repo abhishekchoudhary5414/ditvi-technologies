@@ -4,74 +4,149 @@ import JsonLd from "@/components/JsonLd";
 import LayoutWrapper from "./LayoutWrapper";
 
 
-
 export const metadata: Metadata = {
-  title: "Ditvi Technologies | Digital Solutions & Services",
-  description: "Ditvi Technologies provides premium digital solutions including biodata creation, resume services, and digital celebrations. Transform your digital presence with our professional services.",
+  title: "Ditvi Technologies | Web Development, SEO & Digital Solutions",
+
+  description:
+    "Ditvi Technologies delivers website development, SEO, digital marketing, branding, automation, e-commerce and custom web solutions to help businesses grow online.",
+
   keywords: [
+    // Brand
     "Ditvi Technologies",
-    "Digital Solutions",
-    "Biodata Services",
-    "Digital Resume",
-    "Digital Celebrations",
-    "Professional Services",
-    "Digital Identity",
-    "Online Portfolio",
-    "Digital Transformation",
-    "Custom Digital Solutions"
+    "Ditvi Technologies Bhopal",
+    "Ditvi Technologies India",
+    "Ditvi",
+
+    // Core Services
+    "website development",
+    "web development company",
+    "web design services",
+    "custom website development",
+    "business website development",
+    "responsive website development",
+    "ecommerce website development",
+    "custom web application",
+
+    // Digital Growth
+    "digital marketing services",
+    "digital presence",
+    "SEO services",
+    "search engine optimization",
+    "local SEO services",
+    "Google Business Profile optimization",
+    "lead generation",
+    "social media marketing",
+    "online branding",
+    "digital branding",
+
+    // Technology & Automation
+    "business automation",
+    "workflow automation",
+    "CRM integration",
+    "API integration",
+    "admin dashboard development",
+    "custom software solutions",
+
+    // Industry Websites
+    "wedding website",
+    "birthday website",
+    "taxi booking website",
+    "astrology website",
+    "dance academy website",
+    "gym website",
+    "salon website",
+    "construction website",
+    "school website",
+
+    // Business Solutions
+    "website for small business",
+    "website for startups",
+    "professional business website",
+    "SEO friendly website",
+    "mobile friendly website",
+    "online business solutions",
+    "digital transformation services"
   ],
-  authors: [{ name: "Ditvi Technologies" }],
+
+  authors: [
+    {
+      name: "Ditvi Technologies",
+      url: "https://technologies.ditvi.org",
+    },
+  ],
+
   creator: "Ditvi Technologies",
   publisher: "Ditvi Technologies",
-  metadataBase: new URL('https://technologies.ditvi.org'),
+
+  metadataBase: new URL("https://technologies.ditvi.org"),
+
   alternates: {
-    canonical: '/',
+    canonical: "https://technologies.ditvi.org/",
   },
+
   openGraph: {
-    title: "Ditvi Technologies | Digital Solutions & Services",
-    description: "Transform your digital presence with Ditvi Technologies' premium digital solutions and professional services.",
-    url: 'https://technologies.ditvi.org',
-    siteName: 'Ditvi Technologies',
+    title: "Ditvi Technologies | Web Development, SEO & Digital Solutions",
+
+    description:
+      "Build, grow and automate your business with Ditvi Technologies. We provide website development, SEO, digital marketing, branding, e-commerce and custom automation solutions.",
+
+    url: "https://technologies.ditvi.org/",
+
+    siteName: "Ditvi Technologies",
+
     images: [
       {
-        url: '/og-image.jpg', // Make sure to add this image to your public folder
-        width: 1200,
-        height: 630,
-        alt: 'Ditvi Technologies Banner'
-      }
+        url: '/logo/circlelogo.png',
+        width: 512,
+        height: 512,
+        alt: "Ditvi Technologies - Web Development, SEO & Digital Solutions",
+      },
     ],
-    locale: 'en_US',
-    type: 'website',
+
+    locale: "en_IN",
+    type: "website",
   },
-  verification: {
-    google: 'U61z9WvB238RUEavCgIuOpCpDLFPVOMv2i-Ax3ACxPI',
-  },
+
   twitter: {
-    card: 'summary_large_image',
-    title: "Ditvi Technologies | Digital Solutions",
-    description: "Professional digital solutions for your modern needs",
-    images: ['/twitter-image.jpg'], // Add this image to your public folder
+    card: "summary_large_image",
+
+    title:
+      "Ditvi Technologies | Web Development, SEO & Digital Solutions",
+
+    description:
+      "Website development, SEO, digital marketing, branding, e-commerce and business automation solutions by Ditvi Technologies.",
+
+    images: [
+      "/logo/circlelogo.png",
+    ],
   },
+
   robots: {
     index: true,
     follow: true,
+
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
+
+  verification: {
+    google: "U61z9WvB238RUEavCgIuOpCpDLFPVOMv2i-Ax3ACxPI",
+  },
+
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
-    other: {
-      rel: 'apple-touch-icon-precomposed',
-      url: '/logo.png',
-    },
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logo/circlelogo.png",
   },
+
+  category: "technology",
+
+  applicationName: "Ditvi Technologies",
 };
 
 export const viewport = {
@@ -91,7 +166,7 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "Ditvi Technologies",
     "url": "https://technologies.ditvi.org",
-    "logo": "https://technologies.ditvi.org/logo.png",
+    "logo": "/logo/logo.png",
     "description": "Ditvi Technologies provides premium digital solutions including biodata creation, resume services, and digital celebrations. Transform your digital presence with our professional services.",
     "contactPoint": {
       "@type": "ContactPoint",

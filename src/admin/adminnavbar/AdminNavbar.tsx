@@ -58,7 +58,7 @@ const AdminNavbar = () => {
                     <div className={styles.brand}>
                         <Link href="/admin/dashboard">
                             <Image
-                                src="/logo.png"
+                                src="/logo/logo.svg"
                                 alt="Ditvi Technologies"
                                 width={140}
                                 height={42}

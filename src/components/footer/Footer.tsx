@@ -24,7 +24,7 @@ const Footer = () => {
                     <div className={styles.companyInfo}>
                         <Link href="/" className={styles.logo}>
                             <Image
-                                src="/logo.png"
+                                src="/logo/logo.svg"
                                 alt="Ditvi Technologies"
                                 width={150}
                                 height={48}
