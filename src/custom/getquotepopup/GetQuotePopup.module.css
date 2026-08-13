@@ -55,6 +55,64 @@
   text-align: center;
 }
 
+.popupContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.popupBrand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(255,96,0,0.08), rgba(37,211,102,0.06));
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.brandInner {
+  text-align: center;
+}
+
+.logoWrap {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 0.75rem;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandLogo {
+  display: block;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.brandTitle {
+  font-size: 1.1rem;
+  margin: 0.25rem 0 0.25rem;
+  color: var(--text-primary);
+}
+
+.brandSubtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.popupBody {
+  flex: 1 1 auto;
+  width: 100%;
+}
+
 .description {
   color: var(--text-secondary);
   text-align: center;
@@ -66,6 +124,11 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.row {
+  display: block;
+  gap: 1rem;
 }
 
 .formGroup {
@@ -92,6 +155,70 @@
   transition: all 0.3s ease;
 }
 
+.inputWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.inputIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--accent-light);
+  color: var(--primary-color);
+  border-radius: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.inputWithIcon input {
+  flex: 1 1 auto;
+  padding: 0.75rem 0.75rem;
+}
+
+.phoneMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.phoneCount {
+  color: var(--text-secondary);
+}
+
+.actionsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+  margin-top: 0.5rem;
+}
+
+.whatsappQuick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  background: #25D366;
+  color: #fff;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(37,211,102,0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  justify-content: center;
+  width: 100%;
+}
+
+.whatsappQuick:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(37,211,102,0.22);
+}
+
 .formGroup input:focus,
 .formGroup select:focus,
 .formGroup textarea:focus {
@@ -116,6 +243,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .submitButton:hover:not(:disabled) {
@@ -147,6 +275,16 @@
   margin: 0 auto 1.5rem;
 }
 
+.successIcon {
+  animation: successPop 420ms cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes successPop {
+  0% { transform: scale(.6); opacity: 0 }
+  60% { transform: scale(1.08); opacity: 1 }
+  100% { transform: scale(1); }
+}
+
 .success h3 {
   font-size: 1.5rem;
   color: var(--text-primary);
@@ -161,6 +299,19 @@
 @media (max-width: 768px) {
   .popup {
     padding: 1.5rem;
+  }
+
+  .popupContent {
+    flex-direction: column;
+  }
+
+  .popupBrand {
+    min-width: auto;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
   }
 
   .title {
@@ -186,6 +337,16 @@
   .description {
     font-size: 0.9rem;
   }
+}
+
+/* subtle entry animation */
+.popup {
+  animation: popupIn 260ms cubic-bezier(.2,.9,.2,1);
+}
+
+@keyframes popupIn {
+  from { transform: translate(-50%, -46%) scale(.98); opacity: 0 }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1 }
 }
 
 .errorText {

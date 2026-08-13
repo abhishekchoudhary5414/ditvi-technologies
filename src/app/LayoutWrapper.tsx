@@ -17,10 +17,12 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return <>{children}</>;
   }
 
+  const isHome = pathname === '/';
+
   return (
     <>
       <Navbar />
-      <PopupTrigger />
+      {isHome && <PopupTrigger />}
       {children}
       <Footer />
     </>
