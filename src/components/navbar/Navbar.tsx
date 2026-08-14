@@ -11,7 +11,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { AiOutlineDown } from 'react-icons/ai';
 import { contactDetails } from '@/json/ditviinfo'
 import { services } from '@/json/services'
-import { supabase } from '@/lib/supabase'
+import { buildWhatsAppUrl, trackWhatsAppClick } from '@/lib/whatsappTracking'
 
 
 interface LinkItem {
@@ -31,46 +31,12 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  const whatsappMessage = encodeURIComponent(
-    contactDetails.whatsappMessage || "Hi Ditvi Technologies, I'm interested in your services. Can you help me?"
-  );
+  const whatsappMessage = contactDetails.whatsappMessage || "Hi Ditvi Technologies, I'm interested in your services. Can you help me?";
+  const whatsappLink = buildWhatsAppUrl(contactDetails.whatsappnumber, whatsappMessage);
 
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
-    const parseBrowser = (ua: string) => {
-      if (/chrome|chromium|crios/i.test(ua) && !/edg/i.test(ua)) return 'Chrome'
-      if (/firefox|fxios/i.test(ua)) return 'Firefox'
-      if (/safari/i.test(ua) && !/chrome|chromium|crios/i.test(ua)) return 'Safari'
-      if (/edg/i.test(ua)) return 'Edge'
-      if (/opera|opr/i.test(ua)) return 'Opera'
-      return 'Other'
-    }
-
-    const parseDeviceType = (ua: string) => {
-      if (/mobile|iphone|ipod|android|blackberry|iemobile|opera mini/i.test(ua)) return 'Mobile'
-      if (/ipad|tablet|tab/i.test(ua)) return 'Tablet'
-      return 'Desktop'
-    }
-
-    const trackWhatsAppClick = async () => {
-      try {
-        const userAgent = navigator.userAgent || ''
-        await supabase.from('whatsapp_clicks').insert([
-          {
-            page_url: window.location.pathname,
-            page_title: document.title || null,
-            referrer: document.referrer || null,
-            browser: parseBrowser(userAgent),
-            device_type: parseDeviceType(userAgent),
-            user_agent: userAgent,
-            clicked_at: new Date().toISOString(),
-          },
-        ])
-      } catch (error) {
-        console.error('WhatsApp click tracking failed:', error)
-      }
-    }
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -193,12 +159,12 @@ const Navbar: React.FC = () => {
 
             <div className={styles.right}>
               <a
-                href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
+                href={whatsappLink}
                 className={styles.desktopWhatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact us on WhatsApp"
-                onClick={trackWhatsAppClick}
+                onClick={() => trackWhatsAppClick('navbar_desktop')}
               >
                 <FaWhatsapp size={18} />
                 <span>WhatsApp</span>
@@ -219,12 +185,12 @@ const Navbar: React.FC = () => {
           <div className={clsx(styles.mobileMenu, { [styles.show]: isOpen })}>
             <div className={styles.mobileTop}>
               <a
-                href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
+                href={whatsappLink}
                 className={styles.mobileWhatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact us on WhatsApp"
-                onClick={() => { trackWhatsAppClick(); handleNavigate(); }}
+                onClick={() => { trackWhatsAppClick('navbar_mobile'); handleNavigate(); }}
               >
                 <FaWhatsapp size={18} />
                 <span>Chat on WhatsApp</span>
@@ -237,12 +203,12 @@ const Navbar: React.FC = () => {
       </nav>
       {/* moved WhatsApp button inside nav for right alignment */}
       <a
-        href={`https://wa.me/${contactDetails.whatsappnumber}?text=${whatsappMessage}`}
+        href={whatsappLink}
         className={clsx(styles.whatsappButton, styles.whatsappFixed)}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"
-        onClick={trackWhatsAppClick}
+        onClick={() => trackWhatsAppClick('floating_button')}
       >
         <FaWhatsapp size={24} />
         <span className={styles.whatsappTooltip}>

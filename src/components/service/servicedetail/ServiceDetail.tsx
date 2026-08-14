@@ -8,6 +8,7 @@ import Button from '@/custom/buttons/Button'
 import styles from './ServiceDetail.module.css'
 import { svgMap } from '@/svg/svgMap'
 import GetQuotePopup from '@/custom/getquotepopup/GetQuotePopup'
+import { buildWhatsAppUrl, trackWhatsAppClick } from '@/lib/whatsappTracking'
 
 import type { CityRoute } from '@/data/cities'
 import type { ServiceItem } from '@/json/services'
@@ -105,6 +106,16 @@ const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
                   }}
                 >
                   Enquiry Now
+                </Button>
+
+                <Button
+                  variant='secondary'
+                  href={buildWhatsAppUrl('919285248504', `Hi Ditvi Technologies, I am interested in your service: ${service.title}. Please contact me.`)}
+                  target='_blank'
+                  className={styles.whatsappButton}
+                  onClick={() => trackWhatsAppClick(`service_detail_hero_${service.title}`)}
+                >
+                  WhatsApp
                 </Button>
               </div>
             </motion.div>
@@ -303,6 +314,15 @@ const ServiceDetail = ({ service, cityData }: ServiceDetailProps) => {
                     className={styles.enquiryButton}
                   >
                     Enquiry Now
+                  </Button>
+                  <Button
+                    variant='secondary'
+                    href={buildWhatsAppUrl('919285248504', `Hi Ditvi Technologies, I am interested in your service: ${service.title}. Please contact me.`)}
+                    target='_blank'
+                    className={`${styles.contactButton} ${styles.whatsappButton}`}
+                    onClick={() => trackWhatsAppClick(`service_detail_cta_${service.title}`)}
+                  >
+                    WhatsApp
                   </Button>
                   <Button
                     variant='secondary'

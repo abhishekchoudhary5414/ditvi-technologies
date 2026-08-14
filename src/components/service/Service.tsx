@@ -9,6 +9,7 @@ import Button from '@/custom/buttons/Button'
 import { services, ServiceItem } from '../../json/services'
 import { svgMap } from '@/svg/svgMap'
 import GetQuotePopup from '@/custom/getquotepopup/GetQuotePopup'
+import { buildWhatsAppUrl, trackWhatsAppClick } from '@/lib/whatsappTracking'
 
 
 interface ServiceCardProps {
@@ -104,6 +105,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service, isReversed, index })
                             variant='secondary'
                         >
                             Enquiry Now
+                        </Button>
+                        <Button
+                            href={buildWhatsAppUrl('919285248504', `Hi Ditvi Technologies, I am interested in your service: ${service.title}. Please contact me.`)}
+                            className={`${styles.buttonItem} ${styles.whatsappButton}`}
+                            variant='secondary'
+                            target='_blank'
+                            onClick={() => trackWhatsAppClick(`service_card_${service.title}`)}
+                        >
+                            WhatsApp
                         </Button>
                     </div>
                 </div>

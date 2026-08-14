@@ -15,9 +15,8 @@ interface ContactDetails {
 }
 
 export const socialLinks: SocialLink[] = [
-  { icon: <FiFacebook />, href: 'https://www.facebook.com/ditvifoundation' },
-  { icon: <FiInstagram />, href: 'https://www.instagram.com/ditvifoundation/' },
-  { icon: <FiYoutube />, href: 'https://www.youtube.com/@ditvifoundation' },
+  // { icon: <FiFacebook />, href: 'https://www.facebook.com/ditvitechnologies' },
+  { icon: <FiInstagram />, href: 'https://www.instagram.com/ditvitechnologies/' },
 ];
 export const contactDetails: ContactDetails = {
   email: 'care@ditvi.org',

@@ -24,11 +24,12 @@ const Button = ({
 
     if (href) {
         return (
-            <Link 
-                href={href} 
+            <Link
+                href={href}
                 className={classes}
                 target={target}
                 rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+                onClick={onClick}
             >
                 {children}
             </Link>

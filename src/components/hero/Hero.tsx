@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import styles from './Hero.module.css'
 import Button from '@/custom/buttons/Button'
+import { contactDetails } from '@/json/ditviinfo'
+import { buildWhatsAppUrl, trackWhatsAppClick } from '@/lib/whatsappTracking'
 import CodeIcon from '@mui/icons-material/Code'
 import DesignServicesIcon from '@mui/icons-material/DesignServices'
 import CloudIcon from '@mui/icons-material/Cloud'
@@ -57,8 +59,13 @@ const Hero = () => {
               <Button href="/services" variant="primary">
                 Explore Our Work
               </Button>
-              <Button href="/contact" variant="secondary">
-                Get in Touch
+              <Button
+                href={buildWhatsAppUrl(contactDetails.whatsappnumber, contactDetails.whatsappMessage || "Hi Ditvi Technologies, I'm interested in your services. Can you help me?")}
+                variant="secondary"
+                target="_blank"
+                onClick={() => trackWhatsAppClick('hero_button')}
+              >
+                Connect with Us
               </Button>
             </div>
           </motion.div>
