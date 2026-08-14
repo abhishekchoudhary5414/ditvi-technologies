@@ -23,25 +23,42 @@ const Login = () => {
         setErrorMessage(null)
 
         try {
-            const { data, error } = await supabase
-                .from('admin_users')
-                .select('*')
-                .eq('username', credentials.username)
-                .eq('password', credentials.password)
-                .single()
+            const username = credentials.username.trim()
+            const password = credentials.password
+            const fallbackUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME?.trim()
+            const fallbackPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD?.trim()
 
-            if (error || !data) {
+            const dbMatch = async () => {
+                const { data, error } = await supabase
+                    .from('admin_users')
+                    .select('*')
+                    .eq('username', username)
+                    .maybeSingle()
+
+                if (error && error.code !== 'PGRST116') {
+                    console.error('Supabase admin lookup failed:', error)
+                    return false
+                }
+
+                return !!data && data.password === password
+            }
+
+            const isValidUser =
+                (await dbMatch()) ||
+                (!!fallbackUsername && !!fallbackPassword && username === fallbackUsername && password === fallbackPassword)
+
+            if (!isValidUser) {
                 setErrorMessage('Invalid username or password')
                 toast.error('Invalid credentials')
                 return
             }
 
-            // Store auth flag
-            document.cookie = 'adminAuth=true; path=/'
+            const isSecure = window.location.protocol === 'https:'
+            document.cookie = `adminAuth=true; path=/; SameSite=Lax${isSecure ? '; Secure' : ''}`
             localStorage.setItem('adminAuth', 'true')
 
             toast.success('Welcome!')
-            router.push('/admin/dashboard/')
+            router.push('/admin/dashboard')
             router.refresh()
         } catch (err) {
             console.error('Login error:', err)
