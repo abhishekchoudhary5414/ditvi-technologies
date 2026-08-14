@@ -135,7 +135,7 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    google: "U61z9WvB238RUEavCgIuOpCpDLFPVOMv2i-Ax3ACxPI",
+    google: "7buQkgj9vVj9KKvjpk2ZX2UYkyQa3NagRB8lW_WM-r0",
   },
 
   icons: {
